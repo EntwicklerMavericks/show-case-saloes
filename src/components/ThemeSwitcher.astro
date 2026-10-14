@@ -1,0 +1,232 @@
+---
+import { getAllThemes, THEME_DEFAULT_ID } from '../data/themes';
+
+const allThemes = getAllThemes();
+---
+
+<!-- Widget Flutuante Theme Switcher -->
+<div id="theme-switcher-root" class="fixed bottom-6 right-6 z-50 font-sans">
+  <!-- Botão Flutuante de Disparo (Trigger) -->
+  <button
+    type="button"
+    id="theme-switcher-toggle"
+    class="group relative flex items-center gap-3 px-4 py-3 bg-neutral-900/95 hover:bg-black text-amber-300 border border-amber-500/40 rounded-full shadow-2xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+    aria-expanded="false"
+    aria-haspopup="dialog"
+    aria-controls="theme-switcher-panel"
+    aria-label="Abrir painel de identidades visuais dos salões"
+  >
+    <!-- Ícone de Pincel / Paleta com Animação -->
+    <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center border border-amber-500/30 group-hover:rotate-12 transition-transform">
+      <svg class="w-4 h-4 fill-none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4 4 4 0 014-4h4a4 4 0 014 4 4 4 0 01-4 4H7z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M14 7l7 7m-7-7a4 4 0 00-5.656 0l-1.414 1.414a4 4 0 000 5.656l1.414 1.414" />
+      </svg>
+    </div>
+
+    <!-- Rótulo Descritivo -->
+    <div class="text-left hidden sm:flex flex-col pr-1">
+      <span class="text-[10px] uppercase tracking-widest text-neutral-400 font-semibold leading-tight">
+        Vitrine Digital
+      </span>
+      <span class="text-xs font-bold text-neutral-100 tracking-wide">
+        Alternar Identidade
+      </span>
+    </div>
+
+    <!-- Indicador de Pulso -->
+    <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping absolute -top-0.5 -right-0.5 pointer-events-none"></span>
+    <span class="w-2.5 h-2.5 rounded-full bg-amber-400 absolute -top-0.5 -right-0.5 pointer-events-none"></span>
+  </button>
+
+  <!-- Backdrop Translúcido para Foco e Fechamento -->
+  <div
+    id="theme-switcher-backdrop"
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 hidden transition-opacity duration-300"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Painel Modal / Gaveta de Seleção de Temas -->
+  <div
+    id="theme-switcher-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="theme-panel-title"
+    aria-describedby="theme-panel-desc"
+    class="fixed bottom-20 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-[420px] max-h-[85vh] overflow-y-auto bg-neutral-950 text-neutral-100 border border-neutral-800 rounded-2xl shadow-2xl p-6 z-50 hidden transition-all duration-300 transform scale-95 opacity-0 focus:outline-none"
+  >
+    <!-- Cabeçalho do Painel -->
+    <div class="flex items-start justify-between pb-4 border-b border-neutral-800">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
+            Theodoro Digital Showcase
+          </span>
+        </div>
+        <h2 id="theme-panel-title" class="text-lg font-bold text-neutral-50 tracking-tight font-heading">
+          Identidades Visuais para Salões
+        </h2>
+        <p id="theme-panel-desc" class="text-xs text-neutral-400 mt-1 font-sans">
+          Alterne em tempo real para visualizar como o mesmo código se adapta a diferentes conceitos de público.
+        </p>
+      </div>
+
+      <!-- Botão Fechar -->
+      <button
+        type="button"
+        id="theme-switcher-close"
+        class="text-neutral-400 hover:text-neutral-100 p-1.5 rounded-lg hover:bg-neutral-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+        aria-label="Fechar painel de identidades visuais"
+      >
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Lista dos 3 Temas -->
+    <div class="mt-4 space-y-3" role="radiogroup" aria-label="Selecione um tema de salão">
+      {allThemes.map((themeItem) => {
+        const isDefault = themeItem.meta.id === THEME_DEFAULT_ID;
+        return (
+          <button
+            type="button"
+            role="radio"
+            data-theme-select={themeItem.meta.id}
+            aria-checked={isDefault ? 'true' : 'false'}
+            aria-selected={isDefault ? 'true' : 'false'}
+            class={`w-full text-left p-4 rounded-xl border transition-all duration-200 relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+              isDefault
+                ? 'bg-neutral-900 border-amber-500/60 ring-2 ring-amber-500/40'
+                : 'bg-neutral-900/60 border-neutral-800 hover:bg-neutral-900 hover:border-neutral-700'
+            }`}
+          >
+            <!-- Topo do Card de Tema -->
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold text-amber-200 tracking-wide">
+                {themeItem.meta.name}
+              </span>
+
+              <!-- Indicador de Ativo (Checkmark Acessível) -->
+              <span
+                data-theme-active-indicator
+                class={`items-center gap-1 text-[11px] font-semibold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/30 ${
+                  isDefault ? 'flex' : 'hidden'
+                }`}
+              >
+                <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Ativo</span>
+              </span>
+            </div>
+
+            <!-- Nome Conceitual do Salão -->
+            <div class="font-heading text-base font-bold text-neutral-100 group-hover:text-amber-100 transition-colors">
+              {themeItem.meta.salonName}
+            </div>
+
+            <p class="text-xs text-neutral-400 font-sans mt-1 line-clamp-2 leading-relaxed">
+              {themeItem.meta.concept}
+            </p>
+
+            <!-- Paleta de Amostras de Cores (Swatches) -->
+            <div class="mt-3 flex items-center justify-between pt-2 border-t border-neutral-800/80">
+              <div class="flex items-center gap-1.5" aria-label="Amostras de cores da paleta">
+                {themeItem.meta.swatches.map((swatch) => (
+                  <span
+                    class="w-5 h-5 rounded-full border border-neutral-700 shadow-sm inline-block"
+                    style={`background-color: ${swatch};`}
+                    title={swatch}
+                  />
+                ))}
+              </div>
+
+              <span class="text-[10px] text-neutral-400 font-mono tracking-tighter">
+                {themeItem.meta.shortName}
+              </span>
+            </div>
+          </button>
+        );
+      })}
+    </div>
+
+    <!-- Rodapé Explicativo -->
+    <div class="mt-5 pt-4 border-t border-neutral-800 text-center">
+      <p class="text-[11px] text-neutral-400 leading-relaxed font-sans">
+        ⚡ <strong>Tecnologia:</strong> Vanilla JS + Astro SSG. Sem recarregar página, sem frameworks de estado pesados.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Controle da Abertura, Fechamento e Seleção de Temas
+  const toggleBtn = document.getElementById('theme-switcher-toggle');
+  const panel = document.getElementById('theme-switcher-panel');
+  const backdrop = document.getElementById('theme-switcher-backdrop');
+  const closeBtn = document.getElementById('theme-switcher-close');
+  const themeButtons = document.querySelectorAll<HTMLButtonElement>('[data-theme-select]');
+
+  let isOpen = false;
+
+  const openPanel = () => {
+    if (!panel || !backdrop || !toggleBtn) return;
+    isOpen = true;
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    backdrop.classList.remove('hidden');
+    panel.classList.remove('hidden');
+
+    // Suaviza a animação
+    requestAnimationFrame(() => {
+      panel.classList.remove('scale-95', 'opacity-0');
+      panel.classList.add('scale-100', 'opacity-100');
+    });
+
+    // Foco no primeiro item ou botão de fechar para a11y
+    const firstOption = panel.querySelector<HTMLButtonElement>('[data-theme-select]');
+    firstOption?.focus();
+  };
+
+  const closePanel = () => {
+    if (!panel || !backdrop || !toggleBtn) return;
+    isOpen = false;
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    panel.classList.add('scale-95', 'opacity-0');
+    panel.classList.remove('scale-100', 'opacity-100');
+
+    setTimeout(() => {
+      if (!isOpen) {
+        panel.classList.add('hidden');
+        backdrop.classList.add('hidden');
+      }
+    }, 200);
+
+    toggleBtn.focus();
+  };
+
+  toggleBtn?.addEventListener('click', () => {
+    if (isOpen) closePanel();
+    else openPanel();
+  });
+
+  closeBtn?.addEventListener('click', closePanel);
+  backdrop?.addEventListener('click', closePanel);
+
+  // Fecha no pressionamento de Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) {
+      closePanel();
+    }
+  });
+
+  // Alternância de Tema via Botões
+  themeButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const selectedTheme = btn.getAttribute('data-theme-select');
+      if (selectedTheme && (window as any).TheodoroThemeManager) {
+        (window as any).TheodoroThemeManager.setTheme(selectedTheme);
+      }
+    });
+  });
+</script>

@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Tema Padrão: Luxo Sofisticado (Fiel à Referência Bella Vita) */
+    --color-bg-dark: #0A0A0A;
+    --color-bg-light: #EFECE6;
+    --color-card-light: #FFFFFF;
+    --color-card-dark: #141414;
+
+    --color-text-on-dark: #FFFFFF;
+    --color-text-on-dark-muted: #A3A3A3;
+    --color-text-on-light: #1A1A1A;
+    --color-text-on-light-muted: #5C5550;
+
+    --color-accent: #E8C5B0;
+    --color-accent-hover: #DFC0AB;
+    --color-accent-text: #1A1A1A;
+
+    --color-border-dark: #262626;
+    --color-border-light: #DDD7CE;
+
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --radius-btn: 2px;
+    --radius-card: 8px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-on-dark);
+    font-family: var(--font-body);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-on-dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+img.img-fallback {
+  background-color: #1a1a1a;
+}

@@ -1,0 +1,74 @@
+---
+import type { Theme } from '../data/themes';
+
+interface Props {
+  theme: Theme;
+}
+
+const { theme } = Astro.props;
+---
+
+<section id="depoimentos" class="bg-theme-light text-theme-on-light py-20 sm:py-32 transition-colors duration-300">
+  <div class="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-start">
+      
+      <!-- Coluna da Esquerda: Título da Seção -->
+      <div class="lg:col-span-3">
+        <p class="font-sans text-xs sm:text-sm tracking-[0.25em] uppercase text-theme-on-light-muted mb-3 font-semibold" data-theme-field="testimonials.overline">
+          {theme.testimonials.overline}
+        </p>
+
+        <h2 class="font-heading text-3xl sm:text-4xl xl:text-5xl font-normal text-theme-on-light tracking-tight leading-tight">
+          <span data-theme-field="testimonials.title">{theme.testimonials.title}</span>
+        </h2>
+      </div>
+
+      <!-- Coluna da Direita: Grade com os 3 Cards de Depoimentos Espaçosos -->
+      <div class="lg:col-span-9">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8" data-theme-collection="testimonials">
+          {theme.testimonials.items.map((item, index) => (
+            <div
+              class="bg-theme-card-light p-7 sm:p-8 rounded-xl border border-theme-border-light/70 shadow-sm flex flex-col justify-between"
+              data-theme-item-index={index}
+            >
+              <div>
+                <!-- Aspas Estilizadas em Destaque -->
+                <span class="font-heading text-4xl text-theme-on-light font-normal leading-none block mb-4 select-none">
+                  “
+                </span>
+
+                <!-- Citação da Cliente -->
+                <p
+                  class="font-sans text-xs sm:text-sm text-theme-on-light-muted font-light leading-relaxed mb-8"
+                  data-theme-item-field="quote"
+                >
+                  “{item.quote}”
+                </p>
+              </div>
+
+              <!-- Autor e 5 Estrelas -->
+              <div class="pt-5 border-t border-theme-border-light/50">
+                <p
+                  class="font-sans text-xs sm:text-sm font-medium text-theme-on-light mb-2"
+                  data-theme-item-field="clientName"
+                >
+                  {item.clientName}
+                </p>
+
+                <!-- 5 Estrelas Escuras Fiéis à Imagem de Referência -->
+                <div class="flex items-center gap-1 text-theme-on-light text-sm" aria-label="Avaliação de 5 estrelas">
+                  <span>★</span>
+                  <span>★</span>
+                  <span>★</span>
+                  <span>★</span>
+                  <span>★</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

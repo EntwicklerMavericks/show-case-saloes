@@ -1,0 +1,108 @@
+---
+import type { Theme, DifferentialIconType } from '../data/themes';
+
+interface Props {
+  theme: Theme;
+}
+
+const { theme } = Astro.props;
+
+function renderDifferentialIcon(icon: DifferentialIconType) {
+  switch (icon) {
+    case 'diamond':
+      return `<svg class="w-9 h-9 sm:w-10 sm:h-10 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12l4 6-10 12L2 9l4-6z"></path><path d="M2 9h20"></path><path d="M10 3l-2 6 4 12 4-12-2-6"></path></svg>`;
+    case 'heart':
+      return `<svg class="w-9 h-9 sm:w-10 sm:h-10 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>`;
+    case 'star':
+      return `<svg class="w-9 h-9 sm:w-10 sm:h-10 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
+    case 'map-pin':
+      return `<svg class="w-9 h-9 sm:w-10 sm:h-10 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>`;
+  }
+}
+---
+
+<section id="sobre" class="bg-theme-light text-theme-on-light py-16 sm:py-20 lg:py-24 transition-colors duration-300">
+  <div class="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Bloco Coeso com as 3 Partes: Foto de Alta Definição + Textos + Divisor Vertical + Diferenciais -->
+    <div class="flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-8 lg:gap-10 xl:gap-12">
+      
+      <!-- 1. Fotografia Recriada em Alta Resolução com Cantos Arredondados -->
+      <div class="w-full lg:w-[410px] xl:w-[440px] flex-shrink-0">
+        <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md bg-neutral-200">
+          <img
+            src={theme.about.imageUrl}
+            alt={theme.about.imageAlt}
+            data-theme-field="about.imageUrl"
+            data-theme-target="src"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover object-center"
+          />
+        </div>
+      </div>
+
+      <!-- 2. Textos Centrais e Botão Fino -->
+      <div class="flex-1 flex flex-col justify-between py-1 max-w-xl lg:max-w-md xl:max-w-lg">
+        <div>
+          <!-- Overline -->
+          <p class="font-sans text-[11px] sm:text-xs tracking-[0.25em] uppercase text-theme-on-light-muted mb-2 font-medium" data-theme-field="about.overline">
+            {theme.about.overline}
+          </p>
+
+          <!-- Título em 2 Linhas -->
+          <h2 class="font-heading text-3xl sm:text-4xl font-normal text-theme-on-light tracking-tight leading-tight mb-4">
+            <span data-theme-field="about.title">{theme.about.title}</span>
+          </h2>
+
+          <!-- Parágrafo Institucional -->
+          <p class="font-sans text-xs sm:text-[13px] text-theme-on-light-muted font-light leading-relaxed mb-6" data-theme-field="about.paragraph">
+            {theme.about.paragraph}
+          </p>
+        </div>
+
+        <!-- Botão com Borda Fina Fiel à Referência -->
+        <div>
+          <a
+            href={theme.about.ctaHref}
+            data-theme-field="about.ctaText"
+            class="inline-flex items-center gap-2 px-5 py-2.5 border border-neutral-400/80 hover:border-neutral-900 bg-transparent text-theme-on-light font-sans text-[11px] font-medium uppercase tracking-widest rounded-sm transition-colors group focus:outline-none"
+          >
+            <span>{theme.about.ctaText}</span>
+            <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Linha Divisória Vertical Sutil Fiel à Imagem de Referência -->
+      <div class="hidden lg:block w-[1px] bg-neutral-300/80 self-stretch my-2 flex-shrink-0" aria-hidden="true"></div>
+
+      <!-- 3. Lista dos 4 Diferenciais com Ícones Ampliados e Textos Quebrados Exatamente como na Referência -->
+      <div
+        class="w-full lg:w-[240px] xl:w-[260px] flex-shrink-0 flex flex-col justify-between py-1 space-y-6 lg:space-y-0"
+        data-theme-collection="aboutDifferentials"
+      >
+        {theme.about.differentials.map((item, index) => (
+          <div class="flex items-center gap-4" data-theme-item-index={index}>
+            <!-- Ícone Ampliado Delicado com Traço Fino -->
+            <div
+              class="text-theme-on-light flex-shrink-0"
+              data-theme-item-field="icon"
+              set:html={renderDifferentialIcon(item.icon)}
+            />
+            <!-- Quebra Exata de Duas Linhas Idêntica à Referência Visual -->
+            <div class="font-sans text-xs sm:text-[13px] font-light text-theme-on-light leading-snug">
+              <span class="block" data-theme-item-field="line1">{item.line1}</span>
+              <span class="block" data-theme-item-field="line2">{item.line2}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+
+  </div>
+</section>

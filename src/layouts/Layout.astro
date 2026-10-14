@@ -1,0 +1,98 @@
+---
+import type { Theme } from '../data/themes';
+import { THEMES, THEME_DEFAULT_ID } from '../data/themes';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  initialTheme?: Theme;
+}
+
+const defaultTheme = THEMES[THEME_DEFAULT_ID];
+const {
+  initialTheme = defaultTheme,
+  title = `${initialTheme.meta.salonName} ${initialTheme.meta.salonSubtitle} | Theodoro Digital`,
+  description = initialTheme.hero.description,
+} = Astro.props;
+
+const { tokens } = initialTheme;
+---
+
+<!doctype html>
+<html lang="pt-BR" data-theme={initialTheme.meta.id} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Primário -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Theodoro Digital" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={initialTheme.hero.heroImageUrl} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Variáveis CSS Estáticas Renderizadas no Build para Zero FOUC -->
+    <style define:vars={{
+      'color-bg-dark': tokens.colorBgDark,
+      'color-bg-light': tokens.colorBgLight,
+      'color-card-light': tokens.colorCardLight,
+      'color-card-dark': tokens.colorCardDark,
+      'color-text-on-dark': tokens.colorTextOnDark,
+      'color-text-on-dark-muted': tokens.colorTextOnDarkMuted,
+      'color-text-on-light': tokens.colorTextOnLight,
+      'color-text-on-light-muted': tokens.colorTextOnLightMuted,
+      'color-accent': tokens.colorAccent,
+      'color-accent-hover': tokens.colorAccentHover,
+      'color-accent-text': tokens.colorAccentText,
+      'color-border-dark': tokens.colorBorderDark,
+      'color-border-light': tokens.colorBorderLight,
+      'font-heading': tokens.fontHeading,
+      'font-body': tokens.fontBody,
+      'radius-btn': tokens.radiusBtn,
+      'radius-card': tokens.radiusCard,
+    }}>
+      :root {
+        --color-bg-dark: var(--color-bg-dark);
+        --color-bg-light: var(--color-bg-light);
+        --color-card-light: var(--color-card-light);
+        --color-card-dark: var(--color-card-dark);
+        --color-text-on-dark: var(--color-text-on-dark);
+        --color-text-on-dark-muted: var(--color-text-on-dark-muted);
+        --color-text-on-light: var(--color-text-on-light);
+        --color-text-on-light-muted: var(--color-text-on-light-muted);
+        --color-accent: var(--color-accent);
+        --color-accent-hover: var(--color-accent-hover);
+        --color-accent-text: var(--color-accent-text);
+        --color-border-dark: var(--color-border-dark);
+        --color-border-light: var(--color-border-light);
+        --font-heading: var(--font-heading);
+        --font-body: var(--font-body);
+        --radius-btn: var(--radius-btn);
+        --radius-card: var(--radius-card);
+      }
+    </style>
+  </head>
+  <body class="bg-theme-dark text-theme-on-dark antialiased selection:bg-theme-accent selection:text-theme-accent-text">
+    <slot />
+
+    <!-- Script Central de Temas no Cliente -->
+    <script src="../scripts/theme-manager.ts"></script>
+  </body>
+</html>

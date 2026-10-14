@@ -1,0 +1,121 @@
+---
+import type { Theme } from '../data/themes';
+
+interface Props {
+  theme: Theme;
+}
+
+const { theme } = Astro.props;
+---
+
+<header class="sticky top-0 z-40 w-full bg-theme-dark border-b border-theme-border-dark transition-colors duration-300">
+  <div class="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 h-22 py-4 flex items-center justify-between">
+    <!-- Logo Tipográfico Fiel à Referência (BELLA VITA / HAIR STUDIO) -->
+    <a href="#inicio" class="flex flex-col items-start group focus:outline-none">
+      <span class="font-heading tracking-[0.25em] text-2xl sm:text-3xl font-bold text-theme-on-dark uppercase leading-tight" data-theme-field="header.logoPrefix">
+        {theme.header.logoPrefix}
+      </span>
+      <span class="text-[10px] tracking-[0.35em] uppercase text-theme-on-dark-muted font-sans font-medium mt-0.5" data-theme-field="header.logoHighlight">
+        {theme.header.logoHighlight}
+      </span>
+    </a>
+
+    <!-- Menu Central Desktop Esticado com Mais Espaçamento -->
+    <nav class="hidden md:flex items-center gap-8 lg:gap-10 font-sans text-xs uppercase tracking-widest text-theme-on-dark-muted" aria-label="Navegação Principal">
+      <a href="#inicio" class="text-theme-on-dark font-medium relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-theme-accent">
+        Início
+      </a>
+      <a href="#servicos" class="hover:text-theme-on-dark transition-colors py-1">
+        Serviços
+      </a>
+      <a href="#sobre" class="hover:text-theme-on-dark transition-colors py-1">
+        Sobre
+      </a>
+      <a href="#galeria" class="hover:text-theme-on-dark transition-colors py-1">
+        Galeria
+      </a>
+      <a href="#depoimentos" class="hover:text-theme-on-dark transition-colors py-1">
+        Depoimentos
+      </a>
+      <a href="#contato" class="hover:text-theme-on-dark transition-colors py-1">
+        Contato
+      </a>
+    </nav>
+
+    <!-- Botão de Ação à Direita (AGENDAR HORÁRIO) -->
+    <div class="hidden md:flex items-center">
+      <a
+        href={theme.header.ctaHref}
+        data-theme-field="header.ctaText"
+        class="inline-flex items-center justify-center px-6 py-3 bg-theme-accent hover:bg-theme-accent-hover text-theme-accent-text font-sans text-xs font-semibold uppercase tracking-wider rounded-theme-btn transition-all duration-200 shadow-sm"
+      >
+        {theme.header.ctaText}
+      </a>
+    </div>
+
+    <!-- Botão Hamburger Mobile -->
+    <button
+      type="button"
+      id="mobile-menu-btn"
+      class="md:hidden p-2 text-theme-on-dark hover:text-theme-accent focus:outline-none"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Menu"
+    >
+      <svg id="icon-menu-open" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="icon-menu-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Menu Mobile Desdobrável -->
+  <div id="mobile-menu" class="hidden md:hidden border-b border-theme-border-dark bg-theme-dark px-6 py-6 transition-all duration-300">
+    <nav class="flex flex-col gap-4 font-sans text-sm tracking-wide text-theme-on-dark">
+      <a href="#inicio" class="mobile-nav-link py-1 hover:text-theme-accent">Início</a>
+      <a href="#servicos" class="mobile-nav-link py-1 hover:text-theme-accent">Serviços</a>
+      <a href="#sobre" class="mobile-nav-link py-1 hover:text-theme-accent">Sobre</a>
+      <a href="#galeria" class="mobile-nav-link py-1 hover:text-theme-accent">Galeria</a>
+      <a href="#depoimentos" class="mobile-nav-link py-1 hover:text-theme-accent">Depoimentos</a>
+      <a href="#contato" class="mobile-nav-link py-1 hover:text-theme-accent">Contato</a>
+      <div class="pt-2">
+        <a
+          href={theme.header.ctaHref}
+          data-theme-field="header.ctaText"
+          class="mobile-nav-link flex items-center justify-center w-full px-5 py-3 bg-theme-accent text-theme-accent-text font-sans text-xs font-semibold uppercase tracking-wider rounded-theme-btn"
+        >
+          {theme.header.ctaText}
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-menu-open');
+  const iconClose = document.getElementById('icon-menu-close');
+  const links = document.querySelectorAll('.mobile-nav-link');
+
+  if (menuBtn && mobileMenu && iconOpen && iconClose) {
+    menuBtn.addEventListener('click', () => {
+      const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+      mobileMenu.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+    });
+
+    links.forEach((l) => {
+      l.addEventListener('click', () => {
+        menuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.add('hidden');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+      });
+    });
+  }
+</script>

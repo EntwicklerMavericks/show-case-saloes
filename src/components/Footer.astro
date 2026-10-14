@@ -1,0 +1,126 @@
+---
+import type { Theme } from '../data/themes';
+
+interface Props {
+  theme: Theme;
+}
+
+const { theme } = Astro.props;
+---
+
+<footer id="contato" class="bg-theme-dark text-theme-on-dark border-t border-theme-border-dark pt-16 sm:pt-20 pb-10 transition-colors duration-300">
+  <div class="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-theme-border-dark/80 items-start">
+      
+      <!-- Coluna 1: Logo Tipográfico -->
+      <div class="lg:col-span-3">
+        <a href="#inicio" class="flex flex-col items-start group">
+          <span class="font-heading tracking-[0.25em] text-2xl font-bold text-theme-on-dark uppercase" data-theme-field="footer.logoPrefix">
+            {theme.footer.logoPrefix}
+          </span>
+          <span class="text-[10px] tracking-[0.35em] uppercase text-theme-on-dark-muted font-sans font-medium mt-0.5" data-theme-field="footer.logoHighlight">
+            {theme.footer.logoHighlight}
+          </span>
+        </a>
+      </div>
+
+      <!-- Coluna 2: Contatos Telefônicos e Endereço -->
+      <div class="lg:col-span-3 space-y-4">
+        <!-- Telefones -->
+        <div class="flex items-start gap-3">
+          <svg class="w-4 h-4 text-theme-on-dark-muted flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <div class="font-sans text-xs sm:text-sm text-theme-on-dark-muted space-y-0.5 font-light">
+            <p data-theme-field="footer.phone1">{theme.footer.phone1}</p>
+            <p data-theme-field="footer.phone2">{theme.footer.phone2}</p>
+          </div>
+        </div>
+
+        <!-- Endereço -->
+        <div class="flex items-start gap-3">
+          <svg class="w-4 h-4 text-theme-on-dark-muted flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <div class="font-sans text-xs sm:text-sm text-theme-on-dark-muted space-y-0.5 font-light">
+            <p data-theme-field="footer.addressLine1">{theme.footer.addressLine1}</p>
+            <p data-theme-field="footer.addressLine2">{theme.footer.addressLine2}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna 3: Horários de Atendimento -->
+      <div class="lg:col-span-3 space-y-2">
+        <div class="flex items-start gap-3">
+          <svg class="w-4 h-4 text-theme-on-dark-muted flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <div class="font-sans text-xs sm:text-sm text-theme-on-dark-muted font-light space-y-1">
+            <p class="font-medium text-theme-on-dark" data-theme-field="footer.hoursTitle">{theme.footer.hoursTitle}</p>
+            <p data-theme-field="footer.hoursWeekdays">{theme.footer.hoursWeekdays}</p>
+            <p data-theme-field="footer.hoursSaturday">{theme.footer.hoursSaturday}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna 4: Redes Sociais -->
+      <div class="lg:col-span-3 space-y-3">
+        <p class="font-sans text-xs sm:text-sm font-medium text-theme-on-dark" data-theme-field="footer.socialTitle">
+          {theme.footer.socialTitle}
+        </p>
+
+        <!-- Ícones em Linha de Redes Sociais -->
+        <div class="flex items-center gap-4 text-theme-on-dark-muted">
+          <!-- Instagram -->
+          <a
+            href={theme.footer.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-theme-on-dark transition-colors p-1"
+            aria-label="Instagram"
+          >
+            <svg class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="1.75">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+
+          <!-- Facebook -->
+          <a
+            href={theme.footer.facebookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-theme-on-dark transition-colors p-1"
+            aria-label="Facebook"
+          >
+            <svg class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="1.75">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+
+          <!-- TikTok -->
+          <a
+            href={theme.footer.tiktokUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-theme-on-dark transition-colors p-1"
+            aria-label="TikTok"
+          >
+            <svg class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="1.75">
+              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Barra Inferior de Direitos Autorais Centralizada -->
+    <div class="pt-8 text-center text-xs text-theme-on-dark-muted font-sans font-light">
+      <p data-theme-field="footer.copyright">{theme.footer.copyright}</p>
+    </div>
+  </div>
+</footer>

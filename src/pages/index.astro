@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ShowcaseHeaderBanner from '../components/ShowcaseHeaderBanner.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import About from '../components/About.astro';
+import Gallery from '../components/Gallery.astro';
+import Testimonials from '../components/Testimonials.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Footer from '../components/Footer.astro';
+import ThemeSwitcher from '../components/ThemeSwitcher.astro';
+import { THEMES, THEME_DEFAULT_ID } from '../data/themes';
+
+const initialTheme = THEMES[THEME_DEFAULT_ID];
+---
+
+<Layout initialTheme={initialTheme}>
+  <!-- Faixa Superior Institucional Theodoro Digital -->
+  <ShowcaseHeaderBanner />
+
+  <!-- Cabeçalho com Logo e Navegação -->
+  <Header theme={initialTheme} />
+
+  <!-- Conteúdo Principal da Landing Page -->
+  <main id="main-content">
+    <!-- 1. Hero Section: Foto Editorial à Direita e Textos à Esquerda -->
+    <Hero theme={initialTheme} />
+
+    <!-- 2. Faixa de Serviços: Linha Horizontal com 5 Especialidades -->
+    <Services theme={initialTheme} />
+
+    <!-- 3. Sobre Nós: 3 Colunas (Foto do Salão + História + 4 Diferenciais com Ícones) -->
+    <About theme={initialTheme} />
+
+    <!-- 4. Galeria de Trabalhos: Textos à Esquerda + Grade com 4 Fotos Verticais -->
+    <Gallery theme={initialTheme} />
+
+    <!-- 5. Depoimentos: Título à Esquerda + 3 Cards com 5 Estrelas -->
+    <Testimonials theme={initialTheme} />
+
+    <!-- 6. Banner de Fechamento / Chamada para Agendamento -->
+    <CtaBanner theme={initialTheme} />
+  </main>
+
+  <!-- Rodapé com 4 Colunas e Links Sociais -->
+  <Footer theme={initialTheme} />
+
+  <!-- Theme Switcher Flutuante para Alternar as Identidades Visuais -->
+  <ThemeSwitcher />
+</Layout>
