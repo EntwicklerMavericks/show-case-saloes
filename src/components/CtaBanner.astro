@@ -8,7 +8,7 @@ interface Props {
 const { theme } = Astro.props;
 ---
 
-<section class="relative bg-theme-dark text-theme-on-dark py-24 sm:py-28 overflow-hidden border-t border-theme-border-dark transition-colors duration-300">
+<section class="relative bg-theme-dark text-theme-on-dark py-12 sm:py-14 lg:py-16 overflow-hidden border-t border-theme-border-dark transition-colors duration-300">
   <!-- Imagem de Fundo Sutilmente Escurecida -->
   <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
     <img
@@ -20,7 +20,7 @@ const { theme } = Astro.props;
     <div class="absolute inset-0 bg-theme-dark/85"></div>
   </div>
 
-  <div class="relative z-10 w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 text-center flex flex-col items-center">
+  <div class="relative z-10 w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 text-center flex flex-col items-center">
     <!-- Overline -->
     <p class="font-sans text-xs sm:text-sm tracking-[0.25em] uppercase text-theme-on-dark-muted mb-4 font-medium" data-theme-field="ctaBanner.overline">
       {theme.ctaBanner.overline}
