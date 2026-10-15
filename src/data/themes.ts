@@ -131,6 +131,16 @@ export interface TestimonialsSectionData {
   items: TestimonialItem[];
 }
 
+export interface SalonLocationData {
+  address: string;
+  neighborhood: string;
+  city: string;
+  fullAddress: string;
+  latitude: number;
+  longitude: number;
+  mapsUrl: string;
+}
+
 export interface BookingFormData {
   overline: string;
   title: string;
@@ -142,6 +152,7 @@ export interface BookingFormData {
   whatsappDisplay: string;
   benefits: [string, string, string];
   submitButtonText: string;
+  location: SalonLocationData;
 }
 
 export interface CtaBannerData {
@@ -402,6 +413,15 @@ export const THEMES: ThemeCatalog = {
         'Confirmação rápida da data e do horário ideal para você',
       ],
       submitButtonText: 'Enviar Pedido para o WhatsApp',
+      location: {
+        address: 'Rua Oscar Freire, 920',
+        neighborhood: 'Jardins',
+        city: 'São Paulo - SP',
+        fullAddress: 'Rua Oscar Freire, 920 - Jardins, São Paulo - SP',
+        latitude: -23.5615,
+        longitude: -46.6698,
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Rua+Oscar+Freire+920+Jardins+Sao+Paulo',
+      },
     },
     ctaBanner: {
       overline: 'PRONTA PARA SE SENTIR AINDA MAIS LINDA?',
@@ -414,7 +434,7 @@ export const THEMES: ThemeCatalog = {
       logoHighlight: 'HAIR STUDIO',
       phone1: '(11) 98765-4321',
       phone2: '(11) 98765-4321',
-      addressLine1: 'Rua Exemplo, 123 - Centro',
+      addressLine1: 'Rua Oscar Freire, 920 - Jardins',
       addressLine2: 'São Paulo - SP',
       hoursTitle: 'Horário de atendimento',
       hoursWeekdays: 'Segunda a Sexta: 9h às 19h',
@@ -642,6 +662,15 @@ export const THEMES: ThemeCatalog = {
         'Horários flexíveis e confirmação imediata da agenda',
       ],
       submitButtonText: 'Enviar Pedido para o WhatsApp',
+      location: {
+        address: 'Rua Bela Cintra, 890',
+        neighborhood: 'Vila Madalena',
+        city: 'São Paulo - SP',
+        fullAddress: 'Rua Bela Cintra, 890 - Vila Madalena, São Paulo - SP',
+        latitude: -23.5558,
+        longitude: -46.6612,
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Rua+Bela+Cintra+890+Sao+Paulo',
+      },
     },
     ctaBanner: {
       overline: 'VIVA ESSA EXPERIÊNCIA',
@@ -882,6 +911,15 @@ export const THEMES: ThemeCatalog = {
         'Ritmo sereno com foco em bem-estar e relaxamento',
       ],
       submitButtonText: 'Enviar Pedido para o WhatsApp',
+      location: {
+        address: 'Rua Fradique Coutinho, 1150',
+        neighborhood: 'Pinheiros',
+        city: 'São Paulo - SP',
+        fullAddress: 'Rua Fradique Coutinho, 1150 - Pinheiros, São Paulo - SP',
+        latitude: -23.5583,
+        longitude: -46.6908,
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Rua+Fradique+Coutinho+1150+Pinheiros+Sao+Paulo',
+      },
     },
     ctaBanner: {
       overline: 'RECONECTE-SE COM A SUA NATUREZA',

@@ -155,6 +155,18 @@ function applyThemeInDom(theme) {
       if (textEl) textEl.textContent = b;
     }
   });
+
+  // Location
+  const locCard = document.getElementById('booking-location-card');
+  if (locCard && theme.bookingForm.location) {
+    locCard.setAttribute('data-salon-lat', String(theme.bookingForm.location.latitude));
+    locCard.setAttribute('data-salon-lng', String(theme.bookingForm.location.longitude));
+    locCard.setAttribute('data-salon-address', theme.bookingForm.location.fullAddress);
+  }
+  const salonAddr = document.getElementById('booking-salon-address');
+  if (salonAddr && theme.bookingForm.location) {
+    salonAddr.textContent = theme.bookingForm.location.fullAddress;
+  }
 }
 
 // Aplica Tema 2
@@ -165,6 +177,7 @@ const theme2Service0 = document.querySelector('[data-theme-collection="services"
 const theme2Testimonial0 = document.querySelector('[data-theme-collection="testimonials"] [data-theme-item-index="0"] [data-theme-item-field="clientName"]')?.textContent?.trim();
 const theme2Attendant = document.querySelector('[data-theme-field="bookingForm.attendantName"]')?.textContent?.trim();
 const theme2Whatsapp = document.getElementById('booking-whatsapp-form')?.getAttribute('data-whatsapp-number');
+const theme2Address = document.getElementById('booking-salon-address')?.textContent?.trim();
 
 console.log(`   ✓ Logo atualizado: ${theme2Logo}`);
 console.log(`   ✓ Hero title atualizado: "${theme2HeroTitle}"`);
@@ -172,8 +185,9 @@ console.log(`   ✓ Serviço 0 atualizado: "${theme2Service0}"`);
 console.log(`   ✓ Depoimento 0 atualizado: "${theme2Testimonial0}"`);
 console.log(`   ✓ Atendente Booking atualizada: "${theme2Attendant}"`);
 console.log(`   ✓ WhatsApp Booking atualizado: "${theme2Whatsapp}"`);
+console.log(`   ✓ Endereço do Salão atualizado: "${theme2Address}"`);
 
-if (theme2Logo !== 'LUMINA' || theme2HeroTitle !== 'Cabelos luminosos e cheios de vida' || theme2Attendant !== 'Camila Rocha' || theme2Whatsapp !== '5511977770002') {
+if (theme2Logo !== 'LUMINA' || theme2HeroTitle !== 'Cabelos luminosos e cheios de vida' || theme2Attendant !== 'Camila Rocha' || theme2Whatsapp !== '5511977770002' || !theme2Address?.includes('Bela Cintra')) {
   throw new Error('Falha na atualização para o tema Moderno e Feminino.');
 }
 
@@ -186,6 +200,7 @@ const theme3Service0 = document.querySelector('[data-theme-collection="services"
 const theme3Attendant = document.querySelector('[data-theme-field="bookingForm.attendantName"]')?.textContent?.trim();
 const theme3Whatsapp = document.getElementById('booking-whatsapp-form')?.getAttribute('data-whatsapp-number');
 const theme3SvcOption = document.querySelector('#booking-service option[value="TRICOLOGIA & DETOX"]');
+const theme3Address = document.getElementById('booking-salon-address')?.textContent?.trim();
 
 console.log(`   ✓ Logo atualizado: ${theme3Logo}`);
 console.log(`   ✓ Hero title atualizado: "${theme3HeroTitle}"`);
@@ -193,8 +208,9 @@ console.log(`   ✓ Serviço 0 atualizado: "${theme3Service0}"`);
 console.log(`   ✓ Atendente Booking atualizada: "${theme3Attendant}"`);
 console.log(`   ✓ WhatsApp Booking atualizado: "${theme3Whatsapp}"`);
 console.log(`   ✓ Dropdown de serviços atualizado com: "${theme3SvcOption?.value}"`);
+console.log(`   ✓ Endereço do Salão atualizado: "${theme3Address}"`);
 
-if (theme3Logo !== 'BOTÂNICA' || theme3HeroTitle !== 'A harmonia da natureza a favor da sua essência' || theme3Attendant !== 'Helena Castro' || !theme3SvcOption) {
+if (theme3Logo !== 'BOTÂNICA' || theme3HeroTitle !== 'A harmonia da natureza a favor da sua essência' || theme3Attendant !== 'Helena Castro' || !theme3SvcOption || !theme3Address?.includes('Fradique Coutinho')) {
   throw new Error('Falha na atualização para o tema Natural e Contemporâneo.');
 }
 
@@ -220,15 +236,21 @@ const bookingFormTag = document.getElementById('booking-whatsapp-form');
 const bookingNameInput = document.getElementById('booking-name');
 const bookingPhoneInput = document.getElementById('booking-phone');
 const bookingSubmitBtn = document.getElementById('booking-submit-btn');
+const bookingLocationCard = document.getElementById('booking-location-card');
+const geoDistanceBtn = document.getElementById('geo-distance-btn');
+const geoMapsDirectLink = document.getElementById('geo-maps-direct-link');
 
 console.log(`   ✓ Seção de Agendamento #agendamento presente: ${!!bookingSection}`);
 console.log(`   ✓ Formulário WhatsApp #booking-whatsapp-form presente: ${!!bookingFormTag}`);
 console.log(`   ✓ Campo Nome presente: ${!!bookingNameInput}`);
 console.log(`   ✓ Campo Telefone/WhatsApp presente: ${!!bookingPhoneInput}`);
 console.log(`   ✓ Botão Enviar Pedido presente: ${!!bookingSubmitBtn}`);
+console.log(`   ✓ Card de Localização presente: ${!!bookingLocationCard}`);
+console.log(`   ✓ Botão de Cálculo de Distância presente: ${!!geoDistanceBtn}`);
+console.log(`   ✓ Link direto Google Maps presente: ${!!geoMapsDirectLink}`);
 
-if (!bookingSection || !bookingFormTag || !bookingNameInput || !bookingPhoneInput || !bookingSubmitBtn) {
-  throw new Error('Falha na integridade dos elementos do formulário de agendamento.');
+if (!bookingSection || !bookingFormTag || !bookingNameInput || !bookingPhoneInput || !bookingSubmitBtn || !bookingLocationCard || !geoDistanceBtn) {
+  throw new Error('Falha na integridade dos elementos do formulário de agendamento e localização.');
 }
 const switcherRole = document.querySelector('[role="dialog"]');
 const allImages = document.querySelectorAll('img');

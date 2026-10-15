@@ -410,6 +410,24 @@ export class ThemeManager {
         }
       });
     }
+
+    // Atualiza dados de localização geográfica do salão
+    const locationCard = document.getElementById('booking-location-card');
+    if (locationCard && theme.bookingForm.location) {
+      locationCard.setAttribute('data-salon-lat', String(theme.bookingForm.location.latitude));
+      locationCard.setAttribute('data-salon-lng', String(theme.bookingForm.location.longitude));
+      locationCard.setAttribute('data-salon-address', theme.bookingForm.location.fullAddress);
+    }
+
+    const salonAddressEl = document.getElementById('booking-salon-address');
+    if (salonAddressEl && theme.bookingForm.location) {
+      salonAddressEl.textContent = theme.bookingForm.location.fullAddress;
+    }
+
+    const directMapsLink = document.getElementById('geo-maps-direct-link') as HTMLAnchorElement | null;
+    if (directMapsLink && theme.bookingForm.location) {
+      directMapsLink.href = theme.bookingForm.location.mapsUrl;
+    }
   }
 
   private updateSwitcherControls(activeId: ThemeId): void {

@@ -98,6 +98,103 @@ const { theme } = Astro.props;
             </div>
           ))}
         </div>
+
+        <!-- Card de Localização & Rota com Cálculo de Distância em Tempo Real -->
+        <div
+          id="booking-location-card"
+          class="mt-6 p-4 sm:p-5 rounded-theme-card bg-theme-card-dark border border-theme-border-dark shadow-md"
+          data-salon-lat={theme.bookingForm.location.latitude}
+          data-salon-lng={theme.bookingForm.location.longitude}
+          data-salon-address={theme.bookingForm.location.fullAddress}
+        >
+          <div class="flex items-start gap-3">
+            <div class="p-2 rounded-full bg-theme-accent/20 text-theme-accent flex-shrink-0 mt-0.5">
+              <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5 mb-0.5">
+                <span class="text-[11px] uppercase tracking-wider text-theme-accent font-semibold">
+                  Localização do Salão
+                </span>
+              </div>
+              <p
+                id="booking-salon-address"
+                class="text-xs sm:text-sm text-theme-on-dark font-medium leading-snug"
+                data-theme-field="bookingForm.location.fullAddress"
+              >
+                {theme.bookingForm.location.fullAddress}
+              </p>
+            </div>
+          </div>
+
+          <!-- Ação Interativa de Cálculo de Distância (HTML5 Geolocation) -->
+          <div class="mt-4 pt-3.5 border-t border-theme-border-dark/60">
+            <!-- Botão de Solicitação de Distância -->
+            <button
+              type="button"
+              id="geo-distance-btn"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-theme-btn border border-theme-border-dark bg-theme-dark/80 hover:border-theme-accent text-theme-on-dark hover:text-theme-accent transition-all duration-150 group cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5 text-theme-accent group-hover:scale-110 transition-transform flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+              </svg>
+              <span id="geo-btn-label">Calcular distância até o salão</span>
+            </button>
+
+            <!-- Card de Resultado Calculado com Sucesso -->
+            <div
+              id="geo-distance-result"
+              class="hidden mt-3 p-3 rounded-theme-btn bg-emerald-500/10 border border-emerald-500/30 text-emerald-300"
+            >
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span id="geo-distance-text" class="text-xs font-semibold text-emerald-300">
+                  Calculando distância...
+                </span>
+              </div>
+              <p id="geo-distance-time" class="text-[11px] text-emerald-400/90 mt-1 pl-4">
+                Tempo estimado em trânsito normal.
+              </p>
+              <a
+                id="geo-maps-route-link"
+                href={theme.bookingForm.location.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-2.5 inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-300 hover:text-white underline underline-offset-2 transition-colors ml-4"
+              >
+                <span>Traçar rota no Google Maps</span>
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+
+            <!-- Aviso de Permissão Não Concedida -->
+            <div id="geo-distance-notice" class="hidden mt-2 text-[11px] text-amber-300/90">
+              Permissão de localização não ativada.
+            </div>
+
+            <!-- Link Padrão do Google Maps (Visível por padrão) -->
+            <div id="geo-maps-direct-container" class="mt-2.5">
+              <a
+                id="geo-maps-direct-link"
+                href={theme.bookingForm.location.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-xs text-theme-on-dark-muted hover:text-theme-accent transition-colors"
+              >
+                <span>Ver localização no Google Maps</span>
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Coluna da Direita: Formulário de Agendamento Interativo -->
@@ -434,6 +531,110 @@ const { theme } = Astro.props;
 
       // Abre o WhatsApp oficial em nova aba
       window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    });
+
+    // -------------------------------------------------------------
+    // Cálculo de Distância em Tempo Real via Geolocation API + Haversine
+    // -------------------------------------------------------------
+    const locationCard = document.getElementById('booking-location-card');
+    const geoBtn = document.getElementById('geo-distance-btn');
+    const geoBtnLabel = document.getElementById('geo-btn-label');
+    const geoResult = document.getElementById('geo-distance-result');
+    const geoText = document.getElementById('geo-distance-text');
+    const geoTime = document.getElementById('geo-distance-time');
+    const geoRouteLink = document.getElementById('geo-maps-route-link') as HTMLAnchorElement | null;
+    const geoNotice = document.getElementById('geo-distance-notice');
+    const geoDirectContainer = document.getElementById('geo-maps-direct-container');
+
+    function calculateHaversineKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
+      const R = 6371; // Raio da Terra em km
+      const dLat = ((lat2 - lat1) * Math.PI) / 180;
+      const dLon = ((lon2 - lon1) * Math.PI) / 180;
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos((lat1 * Math.PI) / 180) *
+          Math.cos((lat2 * Math.PI) / 180) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c;
+    }
+
+    function renderDistance(userLat: number, userLng: number) {
+      if (!locationCard || !geoResult || !geoText || !geoTime || !geoRouteLink) return;
+
+      const salonLat = parseFloat(locationCard.getAttribute('data-salon-lat') || '-23.5615');
+      const salonLng = parseFloat(locationCard.getAttribute('data-salon-lng') || '-46.6698');
+
+      const distKm = calculateHaversineKm(userLat, userLng, salonLat, salonLng);
+
+      let distFormatted = '';
+      let timeFormatted = '';
+
+      if (distKm < 1) {
+        const meters = Math.max(50, Math.round(distKm * 1000));
+        distFormatted = `Você está a apenas ~${meters} metros do salão!`;
+        const walkMin = Math.max(1, Math.round(meters / 80));
+        timeFormatted = `Cerca de ${walkMin} min de caminhada a pé`;
+      } else {
+        const kmStr = distKm.toFixed(1).replace('.', ',');
+        distFormatted = `Você está a ~${kmStr} km do nosso salão`;
+        const carMin = Math.max(2, Math.round(distKm * 2.5));
+        timeFormatted = `Aproximadamente ${carMin} min de carro / transporte`;
+      }
+
+      geoText.textContent = distFormatted;
+      geoTime.textContent = timeFormatted;
+
+      const routeUrl = `https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLng}&destination=${salonLat},${salonLng}`;
+      geoRouteLink.href = routeUrl;
+
+      geoResult.classList.remove('hidden');
+      if (geoNotice) geoNotice.classList.add('hidden');
+      if (geoDirectContainer) geoDirectContainer.classList.add('hidden');
+      if (geoBtnLabel) geoBtnLabel.textContent = '📍 Atualizar minha distância';
+    }
+
+    if (geoBtn) {
+      geoBtn.addEventListener('click', () => {
+        if (!navigator.geolocation) {
+          if (geoNotice) {
+            geoNotice.textContent = 'Geolocalização não é suportada pelo seu navegador.';
+            geoNotice.classList.remove('hidden');
+          }
+          return;
+        }
+
+        if (geoBtnLabel) geoBtnLabel.textContent = 'Buscando sua posição...';
+        if (geoNotice) geoNotice.classList.add('hidden');
+
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const coords = {
+              lat: pos.coords.latitude,
+              lng: pos.coords.longitude,
+            };
+            (window as any).__theodoroUserCoords = coords;
+            renderDistance(coords.lat, coords.lng);
+          },
+          () => {
+            if (geoBtnLabel) geoBtnLabel.textContent = '📍 Calcular distância até o salão';
+            if (geoNotice) {
+              geoNotice.textContent = 'Permissão de localização não ativada. Veja o endereço no mapa abaixo.';
+              geoNotice.classList.remove('hidden');
+            }
+          },
+          { timeout: 10000, enableHighAccuracy: true }
+        );
+      });
+    }
+
+    // Ao alternar o tema, se a pessoa já permitiu a localização antes, recalcula a distância para o novo salão
+    window.addEventListener('theodoro:theme-changed', () => {
+      const storedCoords = (window as any).__theodoroUserCoords;
+      if (storedCoords) {
+        renderDistance(storedCoords.lat, storedCoords.lng);
+      }
     });
   }
 
