@@ -48,7 +48,7 @@ if (initialLogo !== 'BELLA VITA' || initialHeroTitle !== 'Realce a sua melhor ve
 }
 
 const initialCardCount = document.querySelectorAll('[data-theme-item-index]').length;
-console.log(`   ✓ Total de itens em coleções dinâmicas: ${initialCardCount} (5 serviços + 4 diferenciais + 4 galeria + 3 depoimentos = 16)`);
+console.log(`   ✓ Total de itens em coleções dinâmicas: ${initialCardCount}`);
 
 // 2. Importa os dados de temas e executa ThemeManager no contexto da janela
 console.log('\n[2/5] Testando Alternância para Tema 2 (Moderno e Feminino - Lumina)...');
@@ -122,7 +122,7 @@ function applyThemeInDom(theme) {
   const testimonials = document.querySelectorAll('[data-theme-collection="testimonials"] [data-theme-item-index]');
   testimonials.forEach((item) => {
     const idx = parseInt(item.getAttribute('data-theme-item-index'), 10);
-    const t = theme.testimonials.items[idx];
+    const t = theme.testimonials.items[idx % theme.testimonials.items.length];
     if (t) {
       item.querySelector('[data-theme-item-field="quote"]').textContent = `“${t.quote}”`;
       item.querySelector('[data-theme-item-field="clientName"]').textContent = t.clientName;

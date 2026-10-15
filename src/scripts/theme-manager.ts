@@ -365,7 +365,7 @@ export class ThemeManager {
       const idxStr = item.getAttribute('data-theme-item-index');
       if (idxStr === null) return;
       const idx = parseInt(idxStr, 10);
-      const t = testimonials[idx];
+      const t = testimonials[idx % testimonials.length];
       if (!t) return;
 
       const quoteEl = item.querySelector('[data-theme-item-field="quote"]');

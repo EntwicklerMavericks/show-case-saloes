@@ -128,7 +128,7 @@ export interface TestimonialsSectionData {
   overline: string;
   title: string;
   disclaimer: string;
-  items: [TestimonialItem, TestimonialItem, TestimonialItem];
+  items: TestimonialItem[];
 }
 
 export interface CtaBannerData {
@@ -325,8 +325,50 @@ export const THEMES: ThemeCatalog = {
         },
         {
           id: 't3',
-          quote: 'É o meu lugar favorito! O cuidado e a atenção fazem toda a diferença.',
+          quote: 'É o meu lugar favorito! O cuidado e a atenção aos detalhes fazem toda a diferença.',
           clientName: 'Camila T.',
+          rating: 5,
+        },
+        {
+          id: 't4',
+          quote: 'Minhas mechas nunca ficaram tão naturais e saudáveis. O tom champagne é deslumbrante!',
+          clientName: 'Fernanda Lima',
+          rating: 5,
+        },
+        {
+          id: 't5',
+          quote: 'A consultoria de visagismo antes do corte transformou minha autoestima por completo.',
+          clientName: 'Patrícia Alencar',
+          rating: 5,
+        },
+        {
+          id: 't6',
+          quote: 'O ritual de tratamento com ozonioterapia salvou meus fios do ressecamento.',
+          clientName: 'Beatriz Mendonça',
+          rating: 5,
+        },
+        {
+          id: 't7',
+          quote: 'Espaço elegante, pontualidade britânica e profissionais de nível internacional.',
+          clientName: 'Carolina Castro',
+          rating: 5,
+        },
+        {
+          id: 't8',
+          quote: 'A escova modelada dura dias com um brilho espelhado que impressiona a todos.',
+          clientName: 'Renata Vasconcelos',
+          rating: 5,
+        },
+        {
+          id: 't9',
+          quote: 'Ambiente exclusivo e acolhedor. Fazer o cabelo aqui é uma verdadeira experiência de spa.',
+          clientName: 'Larissa Fontes',
+          rating: 5,
+        },
+        {
+          id: 't10',
+          quote: 'Fiz a transição para morena iluminada aqui e recebi elogios de todos. Recomendo muito!',
+          clientName: 'Vanessa Prado',
           rating: 5,
         },
       ],
@@ -501,14 +543,56 @@ export const THEMES: ThemeCatalog = {
         },
         {
           id: 't2',
-          quote: 'O efeito Sun Kiss é surreal de natural! Cabelo hidratado e sem aquela sensação ressecada.',
+          quote: 'O efeito Sun Kiss é surreal de natural! Cabelo iluminado e sem aquela sensação ressecada.',
           clientName: 'Beatriz Vasconcelos',
           rating: 5,
         },
         {
           id: 't3',
-          quote: 'Um ambiente que transmite paz. O cronograma glow recuperou o brilho dos meus fios!',
+          quote: 'Um ambiente que transmite paz. O cronograma glow recuperou o brilho e a maciez dos meus fios!',
           clientName: 'Mariana Duarte',
+          rating: 5,
+        },
+        {
+          id: 't4',
+          quote: 'A combinação de make glow com o styling ondulado foi a escolha perfeita para o meu evento.',
+          clientName: 'Gabriela Ramos',
+          rating: 5,
+        },
+        {
+          id: 't5',
+          quote: 'Equipe super atenciosa, música boa e um café delicioso. Dá vontade de morar no salão!',
+          clientName: 'Sofia Nogueira',
+          rating: 5,
+        },
+        {
+          id: 't6',
+          quote: 'Meu corte borboleta ficou com um movimento impecável. Super recomendo o estúdio!',
+          clientName: 'Aline Cerqueira',
+          rating: 5,
+        },
+        {
+          id: 't7',
+          quote: 'A iluminação quente nos fios destacou a cor dos meus olhos de um jeito surpreendente.',
+          clientName: 'Lorena Maia',
+          rating: 5,
+        },
+        {
+          id: 't8',
+          quote: 'Harmonização facial e sobrancelhas com acabamento extremamente delicado e natural.',
+          clientName: 'Helena Pires',
+          rating: 5,
+        },
+        {
+          id: 't9',
+          quote: 'A cada visita saio mais apaixonada pelo meu reflexo no espelho. Elas entendem o que a gente pede!',
+          clientName: 'Daniela Faria',
+          rating: 5,
+        },
+        {
+          id: 't10',
+          quote: 'Tratamentos modernos e produtos cheirosos. O brilho acetinado do cabelo dura semanas!',
+          clientName: 'Isabela Monteiro',
           rating: 5,
         },
       ],
@@ -691,6 +775,48 @@ export const THEMES: ThemeCatalog = {
           id: 't3',
           quote: 'A coloração vegetal cobriu meus fios brancos de forma linda, deixando um tom canela brilhante.',
           clientName: 'Thaís Monteiro',
+          rating: 5,
+        },
+        {
+          id: 't4',
+          quote: 'O corte a seco para cachos respeitou a minha curvatura e devolveu a definição que eu tinha perdido.',
+          clientName: 'Camila Antunes',
+          rating: 5,
+        },
+        {
+          id: 't5',
+          quote: 'A terapia com argila verde purificou o couro cabeludo e controlou a oleosidade logo no primeiro mês.',
+          clientName: 'Lucas Bernardes',
+          rating: 5,
+        },
+        {
+          id: 't6',
+          quote: 'Salão que realmente vive a sustentabilidade. Ambiente com plantas vivas, chá fresco e produtos limpos.',
+          clientName: 'Bruna Figueiredo',
+          rating: 5,
+        },
+        {
+          id: 't7',
+          quote: 'A massagem craniana com óleos essenciais é maravilhosa! Saio de cada sessão leve e renovada.',
+          clientName: 'Juliana Paiva',
+          rating: 5,
+        },
+        {
+          id: 't8',
+          quote: 'Reconstrução vegetal sem químicas agressivas. Meus cachos nunca estiveram tão nutridos e com vida.',
+          clientName: 'Marina Guimarães',
+          rating: 5,
+        },
+        {
+          id: 't9',
+          quote: 'Atendimento humanizado e que escuta a nossa história com o cabelo. Apaixonada pela proposta!',
+          clientName: 'Renata Abreu',
+          rating: 5,
+        },
+        {
+          id: 't10',
+          quote: 'A tintura botânica não causou nenhuma alergia na minha pele sensível e deu um brilho dourado incrível.',
+          clientName: 'Letícia Vargas',
           rating: 5,
         },
       ],
