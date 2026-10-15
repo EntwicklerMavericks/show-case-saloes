@@ -186,6 +186,7 @@ export class ThemeManager {
     this.updateAboutDifferentials(theme);
     this.updateGalleryCollection(theme);
     this.updateTestimonialsCollection(theme);
+    this.updateBookingForm(theme);
 
     // 4. Atualiza estado visual do Theme Switcher
     this.updateSwitcherControls(theme.meta.id);
@@ -374,6 +375,41 @@ export class ThemeManager {
       const clientEl = item.querySelector('[data-theme-item-field="clientName"]');
       if (clientEl) clientEl.textContent = t.clientName;
     });
+  }
+
+  private updateBookingForm(theme: Theme): void {
+    const form = document.getElementById('booking-whatsapp-form');
+    if (form) {
+      form.setAttribute('data-whatsapp-number', theme.bookingForm.whatsappNumber);
+      form.setAttribute('data-attendant-name', theme.bookingForm.attendantName);
+      form.setAttribute('data-salon-name', theme.meta.salonName);
+    }
+
+    const serviceSelect = document.getElementById('booking-service') as HTMLSelectElement | null;
+    if (serviceSelect) {
+      const selectedValue = serviceSelect.value;
+      const optionsHtml = [
+        '<option value="" disabled' + (!selectedValue ? ' selected' : '') + '>Selecione um serviço...</option>',
+        ...theme.services.items.map((svc) => `<option value="${svc.title}">${svc.title} — ${svc.subtitle}</option>`),
+        '<option value="Outro serviço / Avaliação">Outro serviço / Avaliação personalizada</option>',
+      ].join('');
+      serviceSelect.innerHTML = optionsHtml;
+    }
+
+    const benefitsContainer = document.querySelector('[data-theme-collection="bookingBenefits"]');
+    if (benefitsContainer) {
+      const items = benefitsContainer.querySelectorAll('[data-theme-benefit-index]');
+      items.forEach((item) => {
+        const idxStr = item.getAttribute('data-theme-benefit-index');
+        if (idxStr === null) return;
+        const idx = parseInt(idxStr, 10);
+        const text = theme.bookingForm.benefits[idx];
+        if (text) {
+          const textEl = item.querySelector('[data-theme-benefit-text]');
+          if (textEl) textEl.textContent = text;
+        }
+      });
+    }
   }
 
   private updateSwitcherControls(activeId: ThemeId): void {

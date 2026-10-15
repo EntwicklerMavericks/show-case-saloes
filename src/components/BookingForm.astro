@@ -1,0 +1,445 @@
+---
+import type { Theme } from '../data/themes';
+
+interface Props {
+  theme: Theme;
+}
+
+const { theme } = Astro.props;
+---
+
+<section
+  id="agendamento"
+  class="relative bg-theme-dark text-theme-on-dark py-10 sm:py-12 lg:py-16 border-t border-theme-border-dark transition-colors duration-300 scroll-mt-20"
+>
+  <div class="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-start">
+      
+      <!-- Coluna da Esquerda: Apresentação da Atendente e Benefícios -->
+      <div class="lg:col-span-5 flex flex-col">
+        <!-- Overline -->
+        <p
+          class="font-sans text-xs sm:text-sm tracking-[0.25em] uppercase text-theme-on-dark-muted font-medium mb-3"
+          data-theme-field="bookingForm.overline"
+        >
+          {theme.bookingForm.overline}
+        </p>
+
+        <!-- Título -->
+        <h2
+          class="font-heading text-3xl sm:text-4xl lg:text-5xl font-normal text-theme-on-dark tracking-tight leading-tight mb-4"
+          data-theme-field="bookingForm.title"
+        >
+          {theme.bookingForm.title}
+        </h2>
+
+        <!-- Descrição -->
+        <p
+          class="text-theme-on-dark-muted text-sm sm:text-base leading-relaxed mb-8 max-w-xl"
+          data-theme-field="bookingForm.description"
+        >
+          {theme.bookingForm.description}
+        </p>
+
+        <!-- Card da Atendente com Status Online e WhatsApp -->
+        <div class="p-4 sm:p-5 rounded-theme-card bg-theme-card-dark border border-theme-border-dark flex items-center gap-4 mb-8 shadow-md">
+          <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-theme-accent">
+            <img
+              id="booking-attendant-avatar"
+              src={theme.bookingForm.attendantAvatar}
+              alt={theme.bookingForm.attendantName}
+              class="w-full h-full object-cover"
+              data-theme-field="bookingForm.attendantAvatar"
+              data-theme-target="src"
+              loading="lazy"
+            />
+            <!-- Ponto Verde Pulsante de Status Online -->
+            <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-theme-dark rounded-full">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            </span>
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-1.5 mb-1">
+              <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span class="text-[11px] sm:text-xs uppercase tracking-wider text-emerald-400 font-semibold">
+                Online para agendamentos
+              </span>
+            </div>
+            <p
+              id="booking-attendant-name"
+              class="font-heading text-base sm:text-lg text-theme-on-dark font-medium truncate"
+              data-theme-field="bookingForm.attendantName"
+            >
+              {theme.bookingForm.attendantName}
+            </p>
+            <p
+              id="booking-attendant-role"
+              class="text-xs text-theme-on-dark-muted truncate"
+              data-theme-field="bookingForm.attendantRole"
+            >
+              {theme.bookingForm.attendantRole} • WhatsApp Oficial
+            </p>
+          </div>
+        </div>
+
+        <!-- 3 Benefícios de Agendar Conosco -->
+        <div class="space-y-3.5" data-theme-collection="bookingBenefits">
+          {theme.bookingForm.benefits.map((benefit, idx) => (
+            <div class="flex items-start gap-3" data-theme-benefit-index={idx}>
+              <div class="mt-0.5 p-1 rounded-full bg-theme-accent/20 text-theme-accent flex-shrink-0">
+                <svg class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <span class="text-xs sm:text-sm text-theme-on-dark-muted font-medium" data-theme-benefit-text>
+                {benefit}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Coluna da Direita: Formulário de Agendamento Interativo -->
+      <div class="lg:col-span-7">
+        <div class="bg-theme-card-dark border border-theme-border-dark rounded-theme-card p-6 sm:p-8 lg:p-10 shadow-2xl relative">
+          <!-- Cabeçalho do Card -->
+          <div class="mb-6 border-b border-theme-border-dark pb-5">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <h3 class="font-heading text-xl sm:text-2xl text-theme-on-dark font-medium">
+                Solicitar Agendamento
+              </h3>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-sans tracking-wide bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-medium">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z" />
+                </svg>
+                Envio Imediato para WhatsApp
+              </span>
+            </div>
+            <p class="text-xs sm:text-sm text-theme-on-dark-muted mt-2">
+              Preencha os dados e você será redirecionada(o) com a mensagem pronta para envio.
+            </p>
+          </div>
+
+          <!-- Formulário -->
+          <form
+            id="booking-whatsapp-form"
+            novalidate
+            data-whatsapp-number={theme.bookingForm.whatsappNumber}
+            data-attendant-name={theme.bookingForm.attendantName}
+            data-salon-name={theme.meta.salonName}
+            class="space-y-5"
+          >
+            <!-- Linha 1: Nome e Telefone -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="booking-name" class="block text-xs uppercase tracking-wider font-medium text-theme-on-dark-muted mb-1.5">
+                  Seu Nome Completo <span class="text-theme-accent">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="booking-name"
+                  name="name"
+                  required
+                  placeholder="Ex: Maria Silva"
+                  class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-sm placeholder-stone-500 focus:outline-none focus:border-theme-accent transition-colors"
+                />
+                <p id="booking-name-error" class="hidden text-xs text-rose-400 mt-1">Por favor, informe seu nome completo.</p>
+              </div>
+
+              <div>
+                <label for="booking-phone" class="block text-xs uppercase tracking-wider font-medium text-theme-on-dark-muted mb-1.5">
+                  WhatsApp com DDD <span class="text-theme-accent">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="booking-phone"
+                  name="phone"
+                  required
+                  maxlength="15"
+                  placeholder="(11) 99999-9999"
+                  class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-sm placeholder-stone-500 focus:outline-none focus:border-theme-accent transition-colors"
+                />
+                <p id="booking-phone-error" class="hidden text-xs text-rose-400 mt-1">Informe um WhatsApp válido com DDD.</p>
+              </div>
+            </div>
+
+            <!-- Linha 2: Serviço e Data -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="booking-service" class="block text-xs uppercase tracking-wider font-medium text-theme-on-dark-muted mb-1.5">
+                  Serviço de Interesse <span class="text-theme-accent">*</span>
+                </label>
+                <div class="relative">
+                  <select
+                    id="booking-service"
+                    name="service"
+                    required
+                    class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-sm focus:outline-none focus:border-theme-accent transition-colors appearance-none pr-10 cursor-pointer"
+                  >
+                    <option value="" disabled selected>Selecione um serviço...</option>
+                    {theme.services.items.map((svc) => (
+                      <option value={svc.title}>
+                        {svc.title} — {svc.subtitle}
+                      </option>
+                    ))}
+                    <option value="Outro serviço / Avaliação">Outro serviço / Avaliação personalizada</option>
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-theme-on-dark-muted">
+                    <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
+                <p id="booking-service-error" class="hidden text-xs text-rose-400 mt-1">Selecione o serviço de interesse.</p>
+              </div>
+
+              <div>
+                <label for="booking-date" class="block text-xs uppercase tracking-wider font-medium text-theme-on-dark-muted mb-1.5">
+                  Data Sugerida
+                </label>
+                <input
+                  type="date"
+                  id="booking-date"
+                  name="date"
+                  class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-sm focus:outline-none focus:border-theme-accent transition-colors cursor-pointer"
+                />
+              </div>
+            </div>
+
+            <!-- Linha 3: Período Preferencial -->
+            <div>
+              <span class="block text-xs uppercase tracking-wider font-medium text-theme-on-dark-muted mb-2">
+                Melhor Período para Atendimento
+              </span>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <label class="period-option cursor-pointer">
+                  <input type="radio" name="booking-period" value="Manhã (9h às 12h)" class="sr-only peer" />
+                  <div class="px-3 py-2.5 rounded-theme-btn border border-theme-border-dark bg-theme-dark/60 peer-checked:bg-theme-accent peer-checked:border-theme-accent peer-checked:text-theme-accent-text text-theme-on-dark-muted text-xs text-center font-medium transition-all duration-150 hover:border-theme-accent/60">
+                    Manhã (9h-12h)
+                  </div>
+                </label>
+
+                <label class="period-option cursor-pointer">
+                  <input type="radio" name="booking-period" value="Tarde (13h às 17h)" class="sr-only peer" checked />
+                  <div class="px-3 py-2.5 rounded-theme-btn border border-theme-border-dark bg-theme-dark/60 peer-checked:bg-theme-accent peer-checked:border-theme-accent peer-checked:text-theme-accent-text text-theme-on-dark-muted text-xs text-center font-medium transition-all duration-150 hover:border-theme-accent/60">
+                    Tarde (13h-17h)
+                  </div>
+                </label>
+
+                <label class="period-option cursor-pointer">
+                  <input type="radio" name="booking-period" value="Noite (17h às 20h)" class="sr-only peer" />
+                  <div class="px-3 py-2.5 rounded-theme-btn border border-theme-border-dark bg-theme-dark/60 peer-checked:bg-theme-accent peer-checked:border-theme-accent peer-checked:text-theme-accent-text text-theme-on-dark-muted text-xs text-center font-medium transition-all duration-150 hover:border-theme-accent/60">
+                    Noite (17h-20h)
+                  </div>
+                </label>
+
+                <label class="period-option cursor-pointer">
+                  <input type="radio" name="booking-period" value="Primeiro horário disponível" class="sr-only peer" />
+                  <div class="px-3 py-2.5 rounded-theme-btn border border-theme-border-dark bg-theme-dark/60 peer-checked:bg-theme-accent peer-checked:border-theme-accent peer-checked:text-theme-accent-text text-theme-on-dark-muted text-xs text-center font-medium transition-all duration-150 hover:border-theme-accent/60">
+                    Qualquer horário
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Linha 4: Observações -->
+            <div>
+              <label for="booking-notes" class="block text-xs uppercase tracking-wider font-medium text-theme-on-dark-muted mb-1.5">
+                Observações ou Desejos Especiais (Opcional)
+              </label>
+              <textarea
+                id="booking-notes"
+                name="notes"
+                rows="3"
+                placeholder="Ex: Cabelo na altura dos ombros, química anterior, profissional de preferência ou referências que você gostou..."
+                class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-sm placeholder-stone-500 focus:outline-none focus:border-theme-accent transition-colors resize-none"
+              ></textarea>
+            </div>
+
+            <!-- Botão de Envio para WhatsApp -->
+            <button
+              type="submit"
+              id="booking-submit-btn"
+              class="w-full py-4 px-6 bg-theme-accent hover:bg-theme-accent-hover text-theme-accent-text font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-theme-btn transition-all duration-200 shadow-xl flex items-center justify-center gap-3 group focus:outline-none active:scale-[0.99]"
+            >
+              <!-- Ícone Oficial do WhatsApp -->
+              <svg class="w-5 h-5 fill-current flex-shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8.01 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.38 17.04 14.27C16.97 14.17 16.81 14.11 16.56 13.99C16.32 13.86 15.12 13.27 14.9 13.19C14.67 13.11 14.51 13.07 14.35 13.31C14.19 13.55 13.73 14.11 13.58 14.27C13.44 14.44 13.3 14.46 13.06 14.34C12.82 14.21 11.8 13.88 10.6 12.81C9.65 11.97 9.02 10.93 8.89 10.69C8.75 10.45 8.88 10.31 9 10.19C9.11 10.08 9.24 9.9 9.36 9.76C9.48 9.62 9.52 9.52 9.6 9.36C9.68 9.2 9.64 9.06 9.58 8.94C9.52 8.82 9.04 7.64 8.84 7.16C8.65 6.7 8.45 6.76 8.3 6.75L7.84 6.75C7.68 6.75 7.42 6.81 7.2 7.05L8.53 7.33Z"/>
+              </svg>
+              <span data-theme-field="bookingForm.submitButtonText">
+                {theme.bookingForm.submitButtonText}
+              </span>
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+
+            <!-- Rodapé de Confiança e Privacidade -->
+            <div class="flex items-center justify-center gap-2 text-xs text-theme-on-dark-muted pt-1">
+              <svg class="w-3.5 h-3.5 flex-shrink-0 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0110 0v4"></path>
+              </svg>
+              <span>Atendimento humanizado sem espera. Seus dados são protegidos e usados apenas para seu agendamento.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupBookingForm() {
+    const form = document.getElementById('booking-whatsapp-form') as HTMLFormElement | null;
+    if (!form) return;
+
+    const phoneInput = document.getElementById('booking-phone') as HTMLInputElement | null;
+    const nameInput = document.getElementById('booking-name') as HTMLInputElement | null;
+    const serviceSelect = document.getElementById('booking-service') as HTMLSelectElement | null;
+    const dateInput = document.getElementById('booking-date') as HTMLInputElement | null;
+    const notesInput = document.getElementById('booking-notes') as HTMLTextAreaElement | null;
+
+    const nameError = document.getElementById('booking-name-error');
+    const phoneError = document.getElementById('booking-phone-error');
+    const serviceError = document.getElementById('booking-service-error');
+
+    // Define data mínima como hoje no seletor de data
+    if (dateInput) {
+      try {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+      } catch {
+        // Fallback
+      }
+    }
+
+    // Máscara reativa para WhatsApp brasileiro: (XX) XXXXX-XXXX
+    if (phoneInput) {
+      phoneInput.addEventListener('input', (e) => {
+        const target = e.target as HTMLInputElement;
+        let v = target.value.replace(/\D/g, '');
+        if (v.length > 11) v = v.slice(0, 11);
+
+        if (v.length > 10) {
+          target.value = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
+        } else if (v.length > 6) {
+          target.value = `(${v.slice(0, 2)}) ${v.slice(2, 6)}-${v.slice(6)}`;
+        } else if (v.length > 2) {
+          target.value = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+        } else if (v.length > 0) {
+          target.value = `(${v}`;
+        } else {
+          target.value = '';
+        }
+
+        if (phoneError && !phoneError.classList.contains('hidden') && v.length >= 10) {
+          phoneError.classList.add('hidden');
+        }
+      });
+    }
+
+    if (nameInput) {
+      nameInput.addEventListener('input', () => {
+        if (nameError && nameInput.value.trim().length > 2) {
+          nameError.classList.add('hidden');
+        }
+      });
+    }
+
+    if (serviceSelect) {
+      serviceSelect.addEventListener('change', () => {
+        if (serviceError && serviceSelect.value) {
+          serviceError.classList.add('hidden');
+        }
+      });
+    }
+
+    // Envio do formulário com montagem da mensagem personalizada para o WhatsApp
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      let hasError = false;
+
+      // Validação do Nome
+      if (!nameInput || !nameInput.value.trim() || nameInput.value.trim().length < 2) {
+        if (nameError) nameError.classList.remove('hidden');
+        nameInput?.focus();
+        hasError = true;
+      } else {
+        if (nameError) nameError.classList.add('hidden');
+      }
+
+      // Validação do Telefone
+      const rawPhone = phoneInput ? phoneInput.value.replace(/\D/g, '') : '';
+      if (!phoneInput || rawPhone.length < 10) {
+        if (phoneError) phoneError.classList.remove('hidden');
+        if (!hasError) phoneInput?.focus();
+        hasError = true;
+      } else {
+        if (phoneError) phoneError.classList.add('hidden');
+      }
+
+      // Validação do Serviço
+      if (!serviceSelect || !serviceSelect.value) {
+        if (serviceError) serviceError.classList.remove('hidden');
+        if (!hasError) serviceSelect?.focus();
+        hasError = true;
+      } else {
+        if (serviceError) serviceError.classList.add('hidden');
+      }
+
+      if (hasError) return;
+
+      // Formatação da Data
+      let formattedDate = 'A combinar';
+      if (dateInput && dateInput.value) {
+        const parts = dateInput.value.split('-');
+        if (parts.length === 3) {
+          formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
+        }
+      }
+
+      // Período selecionado
+      const periodEl = form.querySelector('input[name="booking-period"]:checked') as HTMLInputElement | null;
+      const periodVal = periodEl ? periodEl.value : 'A combinar';
+
+      // Parâmetros do Salão
+      const attendantName = form.getAttribute('data-attendant-name') || 'Atendimento';
+      const salonName = form.getAttribute('data-salon-name') || 'Salão';
+      const rawWhatsappTarget = form.getAttribute('data-whatsapp-number') || '5511987654321';
+      const cleanTargetPhone = rawWhatsappTarget.replace(/\D/g, '');
+
+      // Construção da mensagem estruturada e polida
+      let message = `Olá, ${attendantName}! Gostaria de solicitar um agendamento no *${salonName}*.\n\n`;
+      message += `📋 *Dados da Solicitação:*\n`;
+      message += `• *Nome:* ${nameInput?.value.trim()}\n`;
+      message += `• *WhatsApp:* ${phoneInput?.value.trim()}\n`;
+      message += `• *Serviço de interesse:* ${serviceSelect?.value}\n`;
+      message += `• *Data sugerida:* ${formattedDate}\n`;
+      message += `• *Período preferencial:* ${periodVal}\n`;
+
+      const notesVal = notesInput?.value.trim();
+      if (notesVal) {
+        message += `• *Observações:* ${notesVal}\n`;
+      }
+
+      message += `\nPoderia me confirmar os horários disponíveis?`;
+
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/${cleanTargetPhone}?text=${encodedMessage}`;
+
+      // Abre o WhatsApp oficial em nova aba
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupBookingForm);
+  } else {
+    setupBookingForm();
+  }
+</script>

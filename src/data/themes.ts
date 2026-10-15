@@ -131,6 +131,19 @@ export interface TestimonialsSectionData {
   items: TestimonialItem[];
 }
 
+export interface BookingFormData {
+  overline: string;
+  title: string;
+  description: string;
+  attendantName: string;
+  attendantRole: string;
+  attendantAvatar: string;
+  whatsappNumber: string;
+  whatsappDisplay: string;
+  benefits: [string, string, string];
+  submitButtonText: string;
+}
+
 export interface CtaBannerData {
   overline: string;
   title: string;
@@ -164,6 +177,7 @@ export interface Theme {
   about: AboutSectionData;
   gallery: GallerySectionData;
   testimonials: TestimonialsSectionData;
+  bookingForm: BookingFormData;
   ctaBanner: CtaBannerData;
   footer: FooterData;
 }
@@ -207,14 +221,14 @@ export const THEMES: ThemeCatalog = {
       logoPrefix: 'BELLA VITA',
       logoHighlight: 'HAIR STUDIO',
       ctaText: 'AGENDAR HORÁRIO',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
     },
     hero: {
       overline: 'MAIS QUE CABELOS. É SOBRE VOCÊ',
       title: 'Realce a sua melhor versão',
       description: 'No Bella Vita Hair Studio, cada detalhe é pensado para valorizar sua beleza, com atendimento exclusivo, profissionais experientes e um ambiente que inspira bem-estar.',
       ctaText: 'AGENDAR HORÁRIO →',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
       heroImageUrl: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1600&q=85',
       heroImageAlt: 'Modelo com cabelo morena iluminada com ondas e acabamento editorial de salão de luxo',
     },
@@ -267,7 +281,7 @@ export const THEMES: ThemeCatalog = {
       title: 'Beleza, cuidado e autoestima',
       paragraph: 'Somos mais que um salão, somos um espaço de transformação. Aqui, unimos técnica, tendências e atendimento personalizado para que você se sinta bem, linda e confiante em todas as fases da sua vida.',
       ctaText: 'CONHEÇA NOSSA HISTÓRIA →',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
       imageUrl: '/images/salon-interior-bella-vita.jpg',
       imageAlt: 'Ambiente interno do Bella Vita Hair Studio com espelhos circulares iluminados e poltronas modernas',
       differentials: [
@@ -282,7 +296,7 @@ export const THEMES: ThemeCatalog = {
       title: 'Resultados que falam por si',
       description: 'Cada cabelo é único. E é por isso que nosso trabalho é personalizado, do seu jeito, com o seu estilo.',
       ctaText: 'VER MAIS NA GALERIA →',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
       items: [
         {
           id: 'g1',
@@ -373,11 +387,27 @@ export const THEMES: ThemeCatalog = {
         },
       ],
     },
+    bookingForm: {
+      overline: 'AGENDAMENTO EXCLUSIVO',
+      title: 'Reserve seu momento de cuidado e transformação',
+      description: 'Escolha o serviço desejado e finalize a confirmação do seu horário diretamente com a nossa concierge via WhatsApp.',
+      attendantName: 'Juliana Mendes',
+      attendantRole: 'Concierge Bella Vita',
+      attendantAvatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80',
+      whatsappNumber: '5511987654321',
+      whatsappDisplay: '(11) 98765-4321',
+      benefits: [
+        'Atendimento individualizado com consultoria de imagem',
+        'Produtos de alta performance e rituais exclusivos',
+        'Confirmação rápida da data e do horário ideal para você',
+      ],
+      submitButtonText: 'Enviar Pedido para o WhatsApp',
+    },
     ctaBanner: {
       overline: 'PRONTA PARA SE SENTIR AINDA MAIS LINDA?',
       title: 'Agende seu horário agora!',
       ctaText: 'AGENDAR HORÁRIO →',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
     },
     footer: {
       logoPrefix: 'BELLA VITA',
@@ -431,14 +461,14 @@ export const THEMES: ThemeCatalog = {
       logoPrefix: 'LUMINA',
       logoHighlight: 'STUDIO & GLOW',
       ctaText: 'AGENDAR HORÁRIO',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
     },
     hero: {
       overline: 'LEVEZA, COR E AUTOESTIMA',
       title: 'Cabelos luminosos e cheios de vida',
       description: 'No Lumina Studio, valorizamos sua personalidade com técnicas modernas de iluminação, tratamentos restauradores e um acolhimento pensado no seu conforto.',
       ctaText: 'AGENDAR PELO WHATSAPP →',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
       heroImageUrl: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=1200&q=85',
       heroImageAlt: 'Modelo com sorriso radiante e morena iluminada com ondas suaves',
     },
@@ -491,7 +521,7 @@ export const THEMES: ThemeCatalog = {
       title: 'Um espaço pensado no seu bem-estar',
       paragraph: 'Acreditamos que cuidar dos cabelos é um ritual de amor-próprio. Criamos um estúdio contemporâneo com luz natural, aromaterapia suave e uma equipe pronta para realçar o que há de mais belo em você.',
       ctaText: 'CONHEÇA NOSSO ESPAÇO →',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
       imageUrl: 'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1200&q=85',
       imageAlt: 'Ambiente aconchegante com espelhos orgânicos e iluminação suave no Lumina Studio',
       differentials: [
@@ -506,7 +536,7 @@ export const THEMES: ThemeCatalog = {
       title: 'Inspirações do nosso dia a dia',
       description: 'Veja como unimos saúde dos fios, texturas modernas e luminosidade para criar resultados encantadores.',
       ctaText: 'VER MAIS NO INSTAGRAM →',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
       items: [
         {
           id: 'g1',
@@ -597,11 +627,27 @@ export const THEMES: ThemeCatalog = {
         },
       ],
     },
+    bookingForm: {
+      overline: 'SEU MOMENTO DE BRILHO',
+      title: 'Agende sua experiência com nossas especialistas',
+      description: 'Conte pra gente a transformação que você deseja e receba o atendimento personalizado da nossa equipe pelo WhatsApp.',
+      attendantName: 'Camila Rocha',
+      attendantRole: 'Recepção Lumina Studio',
+      attendantAvatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80',
+      whatsappNumber: '5511977770002',
+      whatsappDisplay: '(11) 97777-0002',
+      benefits: [
+        'Visagismo moderno e valorização da sua beleza natural',
+        'Espaço acolhedor com atendimento caloroso e dinâmico',
+        'Horários flexíveis e confirmação imediata da agenda',
+      ],
+      submitButtonText: 'Enviar Pedido para o WhatsApp',
+    },
     ctaBanner: {
       overline: 'VIVA ESSA EXPERIÊNCIA',
       title: 'Agende seu momento de cuidado hoje!',
       ctaText: 'AGENDAR HORÁRIO →',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
     },
     footer: {
       logoPrefix: 'LUMINA',
@@ -655,14 +701,14 @@ export const THEMES: ThemeCatalog = {
       logoPrefix: 'BOTÂNICA',
       logoHighlight: 'CONCEPT SALON',
       ctaText: 'AGENDAR HORÁRIO',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
     },
     hero: {
       overline: 'BELEZA LIMPA E TERAPIAS BOTÂNICAS',
       title: 'A harmonia da natureza a favor da sua essência',
       description: 'Combinamos ciência fitoterápica a protocolos puros para revitalizar couro cabeludo e fios, respeitando a curvatura e a identidade de cada cliente.',
       ctaText: 'CONHECER RITUAIS BOTÂNICOS →',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
       heroImageUrl: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85',
       heroImageAlt: 'Mulher serena com texturas naturais em salão com plantas e iluminação orgânica',
     },
@@ -715,7 +761,7 @@ export const THEMES: ThemeCatalog = {
       title: 'Reconexão profunda com a beleza autêntica',
       paragraph: 'Romper com padrões tóxicos e resgatar o poder das formulações puras. Nosso salão é um santuário de luz solar, plantas vivas e rituais que respeitam o tempo da sua regeneração.',
       ctaText: 'NOSSO MANIFESTO →',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
       imageUrl: 'https://images.unsplash.com/photo-1608248597359-0f04ca43b17c?auto=format&fit=crop&w=1200&q=85',
       imageAlt: 'Ingredientes botânicos frescos, argilas puras e óleos sobre bancada de madeira orgânica',
       differentials: [
@@ -730,7 +776,7 @@ export const THEMES: ThemeCatalog = {
       title: 'Texturas, plantas e resultados vivos',
       description: 'Veja como a abordagem holística valoriza a autenticidade e o movimento livre dos seus cabelos.',
       ctaText: 'VER MAIS NO PORTFÓLIO →',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
       items: [
         {
           id: 'g1',
@@ -821,11 +867,27 @@ export const THEMES: ThemeCatalog = {
         },
       ],
     },
+    bookingForm: {
+      overline: 'RITUAIS DE BEM-ESTAR',
+      title: 'Reserve seu horário no nosso refúgio botânico',
+      description: 'Conecte-se com sua essência através de tratamentos orgânicos. Fale diretamente com nosso acolhimento no WhatsApp.',
+      attendantName: 'Helena Castro',
+      attendantRole: 'Atendimento Botânica',
+      attendantAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80',
+      whatsappNumber: '5511966660003',
+      whatsappDisplay: '(11) 96666-0003',
+      benefits: [
+        'Cosméticos limpos, veganos e aromaterapia inclusa',
+        'Diagnóstico personalizado da saúde do couro e fios',
+        'Ritmo sereno com foco em bem-estar e relaxamento',
+      ],
+      submitButtonText: 'Enviar Pedido para o WhatsApp',
+    },
     ctaBanner: {
       overline: 'RECONECTE-SE COM A SUA NATUREZA',
       title: 'Agende seu horário botânico agora!',
       ctaText: 'AGENDAR HORÁRIO →',
-      ctaHref: '#contato',
+      ctaHref: '#agendamento',
     },
     footer: {
       logoPrefix: 'BOTÂNICA',

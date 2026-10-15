@@ -128,6 +128,33 @@ function applyThemeInDom(theme) {
       item.querySelector('[data-theme-item-field="clientName"]').textContent = t.clientName;
     }
   });
+
+  // Booking Form
+  const form = document.getElementById('booking-whatsapp-form');
+  if (form) {
+    form.setAttribute('data-whatsapp-number', theme.bookingForm.whatsappNumber);
+    form.setAttribute('data-attendant-name', theme.bookingForm.attendantName);
+    form.setAttribute('data-salon-name', theme.meta.salonName);
+  }
+
+  const svcSelect = document.getElementById('booking-service');
+  if (svcSelect) {
+    svcSelect.innerHTML = [
+      '<option value="" disabled selected>Selecione um serviço...</option>',
+      ...theme.services.items.map((svc) => `<option value="${svc.title}">${svc.title} — ${svc.subtitle}</option>`),
+      '<option value="Outro serviço / Avaliação">Outro serviço / Avaliação personalizada</option>'
+    ].join('');
+  }
+
+  const benefits = document.querySelectorAll('[data-theme-collection="bookingBenefits"] [data-theme-benefit-index]');
+  benefits.forEach((item) => {
+    const idx = parseInt(item.getAttribute('data-theme-benefit-index'), 10);
+    const b = theme.bookingForm.benefits[idx];
+    if (b) {
+      const textEl = item.querySelector('[data-theme-benefit-text]');
+      if (textEl) textEl.textContent = b;
+    }
+  });
 }
 
 // Aplica Tema 2
@@ -136,13 +163,17 @@ const theme2Logo = document.querySelector('[data-theme-field="header.logoPrefix"
 const theme2HeroTitle = document.querySelector('[data-theme-field="hero.title"]')?.textContent?.trim();
 const theme2Service0 = document.querySelector('[data-theme-collection="services"] [data-theme-item-index="0"] [data-theme-item-field="title"]')?.textContent?.trim();
 const theme2Testimonial0 = document.querySelector('[data-theme-collection="testimonials"] [data-theme-item-index="0"] [data-theme-item-field="clientName"]')?.textContent?.trim();
+const theme2Attendant = document.querySelector('[data-theme-field="bookingForm.attendantName"]')?.textContent?.trim();
+const theme2Whatsapp = document.getElementById('booking-whatsapp-form')?.getAttribute('data-whatsapp-number');
 
 console.log(`   ✓ Logo atualizado: ${theme2Logo}`);
 console.log(`   ✓ Hero title atualizado: "${theme2HeroTitle}"`);
 console.log(`   ✓ Serviço 0 atualizado: "${theme2Service0}"`);
 console.log(`   ✓ Depoimento 0 atualizado: "${theme2Testimonial0}"`);
+console.log(`   ✓ Atendente Booking atualizada: "${theme2Attendant}"`);
+console.log(`   ✓ WhatsApp Booking atualizado: "${theme2Whatsapp}"`);
 
-if (theme2Logo !== 'LUMINA' || theme2HeroTitle !== 'Cabelos luminosos e cheios de vida') {
+if (theme2Logo !== 'LUMINA' || theme2HeroTitle !== 'Cabelos luminosos e cheios de vida' || theme2Attendant !== 'Camila Rocha' || theme2Whatsapp !== '5511977770002') {
   throw new Error('Falha na atualização para o tema Moderno e Feminino.');
 }
 
@@ -152,12 +183,18 @@ applyThemeInDom(THEMES['natural-contemporaneo']);
 const theme3Logo = document.querySelector('[data-theme-field="header.logoPrefix"]')?.textContent?.trim();
 const theme3HeroTitle = document.querySelector('[data-theme-field="hero.title"]')?.textContent?.trim();
 const theme3Service0 = document.querySelector('[data-theme-collection="services"] [data-theme-item-index="0"] [data-theme-item-field="title"]')?.textContent?.trim();
+const theme3Attendant = document.querySelector('[data-theme-field="bookingForm.attendantName"]')?.textContent?.trim();
+const theme3Whatsapp = document.getElementById('booking-whatsapp-form')?.getAttribute('data-whatsapp-number');
+const theme3SvcOption = document.querySelector('#booking-service option[value="TRICOLOGIA & DETOX"]');
 
 console.log(`   ✓ Logo atualizado: ${theme3Logo}`);
 console.log(`   ✓ Hero title atualizado: "${theme3HeroTitle}"`);
 console.log(`   ✓ Serviço 0 atualizado: "${theme3Service0}"`);
+console.log(`   ✓ Atendente Booking atualizada: "${theme3Attendant}"`);
+console.log(`   ✓ WhatsApp Booking atualizado: "${theme3Whatsapp}"`);
+console.log(`   ✓ Dropdown de serviços atualizado com: "${theme3SvcOption?.value}"`);
 
-if (theme3Logo !== 'BOTÂNICA' || theme3HeroTitle !== 'A harmonia da natureza a favor da sua essência') {
+if (theme3Logo !== 'BOTÂNICA' || theme3HeroTitle !== 'A harmonia da natureza a favor da sua essência' || theme3Attendant !== 'Helena Castro' || !theme3SvcOption) {
   throw new Error('Falha na atualização para o tema Natural e Contemporâneo.');
 }
 
@@ -178,6 +215,21 @@ if (restoredLogo !== 'BELLA VITA' || finalCardCount !== initialCardCount) {
 console.log('\n[5/5] Verificando Semântica e Acessibilidade...');
 const h1Tag = document.querySelector('h1');
 const navTag = document.querySelector('nav');
+const bookingSection = document.getElementById('agendamento');
+const bookingFormTag = document.getElementById('booking-whatsapp-form');
+const bookingNameInput = document.getElementById('booking-name');
+const bookingPhoneInput = document.getElementById('booking-phone');
+const bookingSubmitBtn = document.getElementById('booking-submit-btn');
+
+console.log(`   ✓ Seção de Agendamento #agendamento presente: ${!!bookingSection}`);
+console.log(`   ✓ Formulário WhatsApp #booking-whatsapp-form presente: ${!!bookingFormTag}`);
+console.log(`   ✓ Campo Nome presente: ${!!bookingNameInput}`);
+console.log(`   ✓ Campo Telefone/WhatsApp presente: ${!!bookingPhoneInput}`);
+console.log(`   ✓ Botão Enviar Pedido presente: ${!!bookingSubmitBtn}`);
+
+if (!bookingSection || !bookingFormTag || !bookingNameInput || !bookingPhoneInput || !bookingSubmitBtn) {
+  throw new Error('Falha na integridade dos elementos do formulário de agendamento.');
+}
 const switcherRole = document.querySelector('[role="dialog"]');
 const allImages = document.querySelectorAll('img');
 
