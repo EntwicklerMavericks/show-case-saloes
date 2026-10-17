@@ -240,8 +240,8 @@ export const THEMES: ThemeCatalog = {
       description: 'No Bella Vita Hair Studio, cada detalhe é pensado para valorizar sua beleza, com atendimento exclusivo, profissionais experientes e um ambiente que inspira bem-estar.',
       ctaText: 'AGENDAR HORÁRIO →',
       ctaHref: '#agendamento',
-      heroImageUrl: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1600&q=85',
-      heroImageAlt: 'Modelo com cabelo morena iluminada com ondas e acabamento editorial de salão de luxo',
+      heroImageUrl: '/images/hero-model-bella-vita.jpg',
+      heroImageAlt: 'Modelo Bella Vita com ondas morena iluminada em tom avelã e caramelo com acabamento editorial',
     },
     services: {
       items: [
@@ -311,23 +311,23 @@ export const THEMES: ThemeCatalog = {
       items: [
         {
           id: 'g1',
-          url: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=800&q=80',
-          alt: 'Cabelo loiro com ondas perfeitas visto de costas',
+          url: '/images/gallery-bella-1.jpg',
+          alt: 'Cabelo loiro com ondas perfeitas visto de costas em salão de luxo',
         },
         {
           id: 'g2',
-          url: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=800&q=80',
-          alt: 'Cabelo castanho escuro volumoso com ondas deslumbrantes visto de costas',
+          url: '/images/gallery-bella-2.jpg',
+          alt: 'Ritual de lavatório e massagem capilar premium com produtos de alta performance',
         },
         {
           id: 'g3',
-          url: 'https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=800&q=80',
-          alt: 'Perfil de cliente exibindo iluminação morena com tons avelã e caramelo',
+          url: '/images/gallery-bella-3.jpg',
+          alt: 'Corte french bob moderno de precisão com acabamento espelhado em morena',
         },
         {
           id: 'g4',
-          url: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=800&q=80',
-          alt: 'Cabelo escuro longo e ultra liso com brilho espelhado',
+          url: '/images/gallery-bella-4.jpg',
+          alt: 'Ondas morena iluminada com reflexos avelã e acabamento de seda',
         },
       ],
     },
@@ -404,7 +404,7 @@ export const THEMES: ThemeCatalog = {
       description: 'Escolha o serviço desejado e finalize a confirmação do seu horário diretamente com a nossa concierge via WhatsApp.',
       attendantName: 'Juliana Mendes',
       attendantRole: 'Concierge Bella Vita',
-      attendantAvatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80',
+      attendantAvatar: '/images/attendant-juliana.jpg',
       whatsappNumber: '5511987654321',
       whatsappDisplay: '(11) 98765-4321',
       benefits: [
@@ -489,8 +489,8 @@ export const THEMES: ThemeCatalog = {
       description: 'No Lumina Studio, valorizamos sua personalidade com técnicas modernas de iluminação, tratamentos restauradores e um acolhimento pensado no seu conforto.',
       ctaText: 'AGENDAR PELO WHATSAPP →',
       ctaHref: '#agendamento',
-      heroImageUrl: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=1200&q=85',
-      heroImageAlt: 'Modelo com sorriso radiante e morena iluminada com ondas suaves',
+      heroImageUrl: '/images/hero-model-lumina.jpg',
+      heroImageAlt: 'Modelo Lumina Studio com balayage dourada e sorriso radiante e acolhedor',
     },
     services: {
       items: [
@@ -542,8 +542,8 @@ export const THEMES: ThemeCatalog = {
       paragraph: 'Acreditamos que cuidar dos cabelos é um ritual de amor-próprio. Criamos um estúdio contemporâneo com luz natural, aromaterapia suave e uma equipe pronta para realçar o que há de mais belo em você.',
       ctaText: 'CONHEÇA NOSSO ESPAÇO →',
       ctaHref: '#agendamento',
-      imageUrl: 'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1200&q=85',
-      imageAlt: 'Ambiente aconchegante com espelhos orgânicos e iluminação suave no Lumina Studio',
+      imageUrl: '/images/about-interior-lumina.jpg',
+      imageAlt: 'Ambiente aconchegante com espelhos redondos retroiluminados e poltronas de veludo no Lumina Studio',
       differentials: [
         { id: 'd1', icon: 'diamond', title: 'Visagismo contemporâneo', line1: 'Visagismo', line2: 'contemporâneo' },
         { id: 'd2', icon: 'heart', title: 'Cosméticos cruelty-free e suaves', line1: 'Cosméticos', line2: 'cruelty-free' },
@@ -560,13 +560,13 @@ export const THEMES: ThemeCatalog = {
       items: [
         {
           id: 'g1',
-          url: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=800&q=80',
-          alt: 'Ondas douradas luminosas com balanço suave',
+          url: '/images/gallery-lumina-1.jpg',
+          alt: 'Cliente com mechas mel e ondas luminosas em cadeira de salão moderno',
         },
         {
           id: 'g2',
-          url: 'https://images.unsplash.com/photo-1607779097040-26e80aa78e66?auto=format&fit=crop&w=800&q=80',
-          alt: 'Cuidados delicados com unhas em tons terracota e nude',
+          url: '/images/gallery-lumina-2.jpg',
+          alt: 'Nail art e manicure em tons terracota e nude segurando sérum botânico',
         },
         {
           id: 'g3',
@@ -653,7 +653,7 @@ export const THEMES: ThemeCatalog = {
       description: 'Conte pra gente a transformação que você deseja e receba o atendimento personalizado da nossa equipe pelo WhatsApp.',
       attendantName: 'Camila Rocha',
       attendantRole: 'Recepção Lumina Studio',
-      attendantAvatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80',
+      attendantAvatar: '/images/attendant-camila.jpg',
       whatsappNumber: '5511977770002',
       whatsappDisplay: '(11) 97777-0002',
       benefits: [
@@ -738,8 +738,8 @@ export const THEMES: ThemeCatalog = {
       description: 'Combinamos ciência fitoterápica a protocolos puros para revitalizar couro cabeludo e fios, respeitando a curvatura e a identidade de cada cliente.',
       ctaText: 'CONHECER RITUAIS BOTÂNICOS →',
       ctaHref: '#agendamento',
-      heroImageUrl: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85',
-      heroImageAlt: 'Mulher serena com texturas naturais em salão com plantas e iluminação orgânica',
+      heroImageUrl: '/images/hero-model-botanica.jpg',
+      heroImageAlt: 'Modelo Botânica Concept com cachos naturais volumosos e definidos e beleza limpa',
     },
     services: {
       items: [
@@ -791,8 +791,8 @@ export const THEMES: ThemeCatalog = {
       paragraph: 'Romper com padrões tóxicos e resgatar o poder das formulações puras. Nosso salão é um santuário de luz solar, plantas vivas e rituais que respeitam o tempo da sua regeneração.',
       ctaText: 'NOSSO MANIFESTO →',
       ctaHref: '#agendamento',
-      imageUrl: 'https://images.unsplash.com/photo-1608248597359-0f04ca43b17c?auto=format&fit=crop&w=1200&q=85',
-      imageAlt: 'Ingredientes botânicos frescos, argilas puras e óleos sobre bancada de madeira orgânica',
+      imageUrl: '/images/about-interior-botanica.jpg',
+      imageAlt: 'Ambiente biofílico do Botânica com plantas pendentes, bancadas em carvalho e luz natural',
       differentials: [
         { id: 'd1', icon: 'diamond', title: 'Formulações 100% veganas e limpas', line1: 'Formulações', line2: '100% veganas' },
         { id: 'd2', icon: 'heart', title: 'Especialistas em transição capilar', line1: 'Especialistas em', line2: 'transição capilar' },
@@ -902,7 +902,7 @@ export const THEMES: ThemeCatalog = {
       description: 'Conecte-se com sua essência através de tratamentos orgânicos. Fale diretamente com nosso acolhimento no WhatsApp.',
       attendantName: 'Helena Castro',
       attendantRole: 'Atendimento Botânica',
-      attendantAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80',
+      attendantAvatar: '/images/attendant-helena.jpg',
       whatsappNumber: '5511966660003',
       whatsappDisplay: '(11) 96666-0003',
       benefits: [

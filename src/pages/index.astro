@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ShowcaseHeaderBanner from '../components/ShowcaseHeaderBanner.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import Services from '../components/Services.astro';
@@ -17,9 +16,6 @@ const initialTheme = THEMES[THEME_DEFAULT_ID];
 ---
 
 <Layout initialTheme={initialTheme}>
-  <!-- Faixa Superior Institucional Theodoro Digital -->
-  <ShowcaseHeaderBanner />
-
   <!-- Cabeçalho com Logo e Navegação -->
   <Header theme={initialTheme} />
 
