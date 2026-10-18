@@ -19,11 +19,11 @@ const { theme } = Astro.props;
       data-theme-target="src"
       loading="eager"
       fetchpriority="high"
-      class="w-full h-full object-cover object-[center_18%] sm:object-[center_25%] lg:object-center"
+      class="w-full h-full object-cover object-[center_18%] sm:object-[center_25%] lg:object-center filter blur-[2px] sm:blur-[1px] lg:blur-none brightness-[0.5] sm:brightness-[0.6] lg:brightness-100 scale-105 lg:scale-100 transition-all duration-700"
     />
-    <!-- Gradiente Mobile: Scrim Escuro Editorial que garante 100% de contraste e legibilidade, mantendo o rosto visível no topo -->
-    <div class="block lg:hidden absolute inset-0 bg-gradient-to-t from-theme-dark via-theme-dark/85 to-theme-dark/45 pointer-events-none"></div>
-    <div class="block lg:hidden absolute inset-0 bg-theme-dark/30 pointer-events-none"></div>
+    <!-- Gradiente Mobile: Scrim Escuro Editorial Aveludado que garante 100% de contraste e legibilidade, mantendo a presença acolhedora da modelo -->
+    <div class="block lg:hidden absolute inset-0 bg-gradient-to-t from-theme-dark via-theme-dark/90 to-theme-dark/60 pointer-events-none"></div>
+    <div class="block lg:hidden absolute inset-0 bg-black/45 pointer-events-none"></div>
 
     <!-- Gradiente Desktop para Fusão Lateral e Vertical -->
     <div class="hidden lg:block absolute inset-y-0 left-0 w-64 xl:w-80 bg-gradient-to-r from-theme-dark via-theme-dark/80 to-transparent pointer-events-none"></div>
@@ -31,21 +31,21 @@ const { theme } = Astro.props;
     <div class="hidden lg:block absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-theme-dark/40 to-transparent pointer-events-none"></div>
   </div>
 
-  <!-- Conteúdo Textual do Hero Perfeitamente Alinhado e com Largura Completa no Mobile -->
+  <!-- Conteúdo Textual do Hero Perfeitamente Alinhado e com Contraste Reforçado no Mobile -->
   <div class="relative z-10 w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-12 sm:py-16 lg:py-20 pointer-events-none">
     <div class="max-w-xl xl:max-w-2xl pointer-events-auto">
       <!-- Subtítulo / Overline -->
-      <p class="font-sans text-[11px] sm:text-xs md:text-sm tracking-[0.22em] sm:tracking-[0.25em] uppercase text-theme-on-dark-muted mb-4 sm:mb-5 font-medium" data-theme-field="hero.overline">
+      <p class="font-sans text-[11px] sm:text-xs md:text-sm tracking-[0.22em] sm:tracking-[0.25em] uppercase text-theme-on-dark-muted mb-4 sm:mb-5 font-semibold drop-shadow-sm" data-theme-field="hero.overline">
         {theme.hero.overline}
       </p>
 
-      <!-- Título Principal Monumental com Quebra Fluida e Natural -->
-      <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-normal text-theme-on-dark tracking-tight leading-[1.15] sm:leading-[1.1] mb-5 sm:mb-6">
+      <!-- Título Principal Monumental com Quebra Fluida e Contraste Nítido -->
+      <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-normal text-theme-on-dark tracking-tight leading-[1.15] sm:leading-[1.1] mb-5 sm:mb-6 drop-shadow-md">
         <span data-theme-field="hero.title">{theme.hero.title}</span>
       </h1>
 
-      <!-- Descrição Orientada ao Cuidado e Benefício -->
-      <p class="font-sans text-sm sm:text-base lg:text-lg text-theme-on-dark-muted font-light leading-relaxed mb-8 sm:mb-10 max-w-lg" data-theme-field="hero.description">
+      <!-- Descrição Orientada ao Cuidado e Benefício com Ótima Leitura -->
+      <p class="font-sans text-sm sm:text-base lg:text-lg text-theme-on-dark-muted font-light leading-relaxed mb-8 sm:mb-10 max-w-lg drop-shadow-sm" data-theme-field="hero.description">
         {theme.hero.description}
       </p>
 
@@ -53,7 +53,7 @@ const { theme } = Astro.props;
       <a
         href={theme.hero.ctaHref}
         data-theme-field="hero.ctaText"
-        class="inline-flex w-full sm:w-auto justify-center items-center gap-3 px-8 py-4 bg-theme-accent hover:bg-theme-accent-hover text-theme-accent-text font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-theme-btn transition-all duration-200 shadow-xl group focus:outline-none"
+        class="inline-flex w-full sm:w-auto justify-center items-center gap-3 px-8 py-4 bg-theme-accent hover:bg-theme-accent-hover text-theme-accent-text font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-theme-btn transition-all duration-200 shadow-2xl group focus:outline-none"
       >
         <span>{theme.hero.ctaText}</span>
         <svg class="w-4 h-4 group-hover:translate-x-1.5 transition-transform flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
