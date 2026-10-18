@@ -19,11 +19,11 @@ const { theme } = Astro.props;
       data-theme-target="src"
       loading="eager"
       fetchpriority="high"
-      class="w-full h-full object-cover object-[center_18%] sm:object-[center_25%] lg:object-center filter blur-[2px] sm:blur-[1px] lg:blur-none brightness-[0.5] sm:brightness-[0.6] lg:brightness-100 scale-105 lg:scale-100 transition-all duration-700"
+      class="w-full h-full object-cover object-[center_18%] sm:object-[center_25%] lg:object-center brightness-[0.92] sm:brightness-[0.95] lg:brightness-100 transition-all duration-700"
     />
-    <!-- Gradiente Mobile: Scrim Escuro Editorial Aveludado que garante 100% de contraste e legibilidade, mantendo a presença acolhedora da modelo -->
-    <div class="block lg:hidden absolute inset-0 bg-gradient-to-t from-theme-dark via-theme-dark/90 to-theme-dark/60 pointer-events-none"></div>
-    <div class="block lg:hidden absolute inset-0 bg-black/45 pointer-events-none"></div>
+    <!-- Gradiente Mobile: Transição Suave que preserva o rosto da modelo luminoso no topo e garante leitura perfeita nos textos abaixo -->
+    <div class="block lg:hidden absolute inset-0 bg-gradient-to-t from-theme-dark via-theme-dark/80 to-transparent pointer-events-none"></div>
+    <div class="block lg:hidden absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-theme-dark/60 to-transparent pointer-events-none"></div>
 
     <!-- Gradiente Desktop para Fusão Lateral e Vertical -->
     <div class="hidden lg:block absolute inset-y-0 left-0 w-64 xl:w-80 bg-gradient-to-r from-theme-dark via-theme-dark/80 to-transparent pointer-events-none"></div>
