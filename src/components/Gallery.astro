@@ -29,7 +29,7 @@ const { theme } = Astro.props;
         <a
           href={theme.gallery.ctaHref}
           data-theme-field="gallery.ctaText"
-          class="inline-flex items-center gap-2.5 px-6 py-3.5 border border-neutral-700 hover:border-theme-on-dark text-theme-on-dark font-sans text-xs font-semibold uppercase tracking-wider rounded-theme-btn transition-colors duration-200 group focus:outline-none"
+          class="inline-flex w-full sm:w-auto justify-center items-center gap-2.5 px-6 py-3.5 border border-neutral-700 hover:border-theme-on-dark text-theme-on-dark font-sans text-xs font-semibold uppercase tracking-wider rounded-theme-btn transition-colors duration-200 group focus:outline-none"
         >
           <span>{theme.gallery.ctaText}</span>
           <svg class="w-4 h-4 group-hover:translate-x-1.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -41,7 +41,7 @@ const { theme } = Astro.props;
 
       <!-- Coluna da Direita: Grade com 4 Fotografias Verticais Esticadas -->
       <div class="lg:col-span-8 xl:col-span-9">
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6" data-theme-collection="gallery">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-6" data-theme-collection="gallery">
           {theme.gallery.items.map((item, index) => (
             <div
               class="relative aspect-[3/4] sm:aspect-[9/13] rounded-lg overflow-hidden bg-neutral-900 shadow-lg group cursor-pointer"

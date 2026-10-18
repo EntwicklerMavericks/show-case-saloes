@@ -199,7 +199,7 @@ const { theme } = Astro.props;
 
       <!-- Coluna da Direita: Formulário de Agendamento Interativo -->
       <div class="lg:col-span-7">
-        <div class="bg-theme-card-dark border border-theme-border-dark rounded-theme-card p-6 sm:p-8 lg:p-10 shadow-2xl relative">
+        <div class="bg-theme-card-dark border border-theme-border-dark rounded-theme-card p-4 sm:p-8 lg:p-10 shadow-2xl relative">
           <!-- Cabeçalho do Card -->
           <div class="mb-6 border-b border-theme-border-dark pb-5">
             <div class="flex flex-wrap items-center justify-between gap-3">
@@ -239,7 +239,7 @@ const { theme } = Astro.props;
                   name="name"
                   required
                   placeholder="Ex: Maria Silva"
-                  class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-sm placeholder-stone-500 focus:outline-none focus:border-theme-accent transition-colors"
+                  class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-base sm:text-sm placeholder-stone-500 focus:outline-none focus:border-theme-accent transition-colors"
                 />
                 <p id="booking-name-error" class="hidden text-xs text-rose-400 mt-1">Por favor, informe seu nome completo.</p>
               </div>
@@ -255,7 +255,7 @@ const { theme } = Astro.props;
                   required
                   maxlength="15"
                   placeholder="(11) 99999-9999"
-                  class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-sm placeholder-stone-500 focus:outline-none focus:border-theme-accent transition-colors"
+                  class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-base sm:text-sm placeholder-stone-500 focus:outline-none focus:border-theme-accent transition-colors"
                 />
                 <p id="booking-phone-error" class="hidden text-xs text-rose-400 mt-1">Informe um WhatsApp válido com DDD.</p>
               </div>
@@ -272,7 +272,7 @@ const { theme } = Astro.props;
                     id="booking-service"
                     name="service"
                     required
-                    class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-sm focus:outline-none focus:border-theme-accent transition-colors appearance-none pr-10 cursor-pointer"
+                    class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-base sm:text-sm focus:outline-none focus:border-theme-accent transition-colors appearance-none pr-10 cursor-pointer"
                   >
                     <option value="" disabled selected>Selecione um serviço...</option>
                     {theme.services.items.map((svc) => (
@@ -299,7 +299,7 @@ const { theme } = Astro.props;
                   type="date"
                   id="booking-date"
                   name="date"
-                  class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-sm focus:outline-none focus:border-theme-accent transition-colors cursor-pointer"
+                  class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-base sm:text-sm focus:outline-none focus:border-theme-accent transition-colors cursor-pointer"
                 />
               </div>
             </div>
@@ -350,7 +350,7 @@ const { theme } = Astro.props;
                 name="notes"
                 rows="3"
                 placeholder="Ex: Cabelo na altura dos ombros, química anterior, profissional de preferência ou referências que você gostou..."
-                class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-sm placeholder-stone-500 focus:outline-none focus:border-theme-accent transition-colors resize-none"
+                class="w-full px-4 py-3 bg-theme-dark/80 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-base sm:text-sm placeholder-stone-500 focus:outline-none focus:border-theme-accent transition-colors resize-none"
               ></textarea>
             </div>
 

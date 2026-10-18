@@ -74,58 +74,55 @@ function renderInitialIcon(icon: ServiceIconType) {
 
 <section id="servicos" class="bg-theme-dark border-t border-b border-theme-border-dark py-8 sm:py-10 lg:py-12 transition-colors duration-300">
   <div class="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-    <!-- Faixa Horizontal Esticada com os 5 Serviços Bem Distribuídos e Divisores Verticais -->
+    <!-- Grade Responsiva: 2 Colunas no Mobile com visual refinado; 5 Colunas no Desktop com divisores -->
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 items-stretch justify-items-stretch"
+      class="grid grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-4 lg:gap-0 items-stretch justify-items-stretch"
       data-theme-collection="services"
     >
-      {theme.services.items.map((item, index) => (
-        <div
-          class="relative flex flex-col items-center text-center group cursor-pointer px-4 sm:px-6 py-6 sm:py-5 transition-colors duration-200"
-          data-theme-item-index={index}
-        >
-          <!-- Ícone Delicado Minimalista em Tom Accent Dourado/Champanhe -->
+      {theme.services.items.map((item, index) => {
+        const isLastOnMobile = index === 4;
+        return (
           <div
-            class="text-theme-accent mb-4 transition-transform duration-300 group-hover:scale-110"
-            data-theme-item-field="icon"
-            set:html={renderInitialIcon(item.icon)}
-          />
-
-          <!-- Título do Serviço em Caixa Alta com Espaçamento Amplo -->
-          <h2
-            class="font-sans text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-theme-on-dark mb-2.5 group-hover:text-theme-accent transition-colors duration-200"
-            data-theme-item-field="title"
+            class={`relative flex flex-col items-center text-center group cursor-pointer px-3 sm:px-5 py-4 sm:py-5 rounded-xl lg:rounded-none bg-theme-card-dark/35 lg:bg-transparent border border-theme-border-dark/60 lg:border-none transition-all duration-200 hover:border-theme-accent/40 ${
+              isLastOnMobile ? 'col-span-2 sm:col-span-1 lg:col-span-1 max-w-[340px] w-full mx-auto' : ''
+            }`}
+            data-theme-item-index={index}
           >
-            {item.title}
-          </h2>
-
-          <!-- Subtítulo Curto Descritivo em 2 Linhas Balanceadas -->
-          <p
-            class="font-sans text-xs sm:text-[13px] text-theme-on-dark-muted font-light leading-relaxed max-w-[210px]"
-            data-theme-item-field="subtitle"
-          >
-            <span class="block" data-theme-item-field="line1">{item.line1 || item.subtitle}</span>
-            {item.line2 && <span class="block" data-theme-item-field="line2">{item.line2}</span>}
-          </p>
-
-          <!-- Linha divisória vertical mais fina e menor (desktop: centrada, h-12 xl:h-14, ultrafina) -->
-          {index < theme.services.items.length - 1 && (
+            <!-- Ícone Delicado Minimalista em Tom Accent Dourado/Champanhe -->
             <div
-              class="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 h-12 xl:h-14 w-[1px] bg-[#383838] pointer-events-none"
-              style="background-color: var(--color-border-dark, #383838);"
-              aria-hidden="true"
+              class="text-theme-accent mb-2.5 sm:mb-4 transition-transform duration-300 group-hover:scale-110 flex items-center justify-center"
+              data-theme-item-field="icon"
+              set:html={renderInitialIcon(item.icon)}
             />
-          )}
 
-          <!-- Linha divisória sutil para mobile -->
-          {index < theme.services.items.length - 1 && (
-            <div
-              class="block sm:hidden w-16 h-[1px] bg-[#2a2a2a] mt-6 mx-auto pointer-events-none"
-              aria-hidden="true"
-            />
-          )}
-        </div>
-      ))}
+            <!-- Título do Serviço em Caixa Alta com Espaçamento Amplo -->
+            <h2
+              class="font-sans text-[11px] sm:text-xs lg:text-sm font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-theme-on-dark mb-1 sm:mb-2 group-hover:text-theme-accent transition-colors duration-200"
+              data-theme-item-field="title"
+            >
+              {item.title}
+            </h2>
+
+            <!-- Subtítulo Curto Descritivo em 2 Linhas Balanceadas -->
+            <p
+              class="font-sans text-[11px] sm:text-xs lg:text-[13px] text-theme-on-dark-muted font-light leading-snug max-w-[210px]"
+              data-theme-item-field="subtitle"
+            >
+              <span class="block" data-theme-item-field="line1">{item.line1 || item.subtitle}</span>
+              {item.line2 && <span class="block" data-theme-item-field="line2">{item.line2}</span>}
+            </p>
+
+            <!-- Linha divisória vertical mais fina e menor (desktop: centrada, h-12 xl:h-14, ultrafina) -->
+            {index < theme.services.items.length - 1 && (
+              <div
+                class="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 h-12 xl:h-14 w-[1px] bg-[#383838] pointer-events-none"
+                style="background-color: var(--color-border-dark, #383838);"
+                aria-hidden="true"
+              />
+            )}
+          </div>
+        );
+      })}
     </div>
   </div>
 </section>
