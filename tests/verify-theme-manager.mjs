@@ -252,12 +252,17 @@ console.log(`   ✓ Link direto Google Maps presente: ${!!geoMapsDirectLink}`);
 if (!bookingSection || !bookingFormTag || !bookingNameInput || !bookingPhoneInput || !bookingSubmitBtn || !bookingLocationCard || !geoDistanceBtn) {
   throw new Error('Falha na integridade dos elementos do formulário de agendamento e localização.');
 }
-const switcherRole = document.querySelector('[role="dialog"]');
+const whatsappFloat = document.getElementById('whatsapp-float-btn');
 const allImages = document.querySelectorAll('img');
 
 console.log(`   ✓ <h1> único presente: ${!!h1Tag}`);
 console.log(`   ✓ <nav> com aria-label presente: ${!!navTag}`);
-console.log(`   ✓ Theme Switcher com role="dialog": ${!!switcherRole}`);
+console.log(`   ✓ Botão Flutuante do WhatsApp presente: ${!!whatsappFloat}`);
+console.log(`   ✓ WhatsApp Float direcionando para 5511933565640: ${whatsappFloat?.getAttribute('href')?.includes('5511933565640')}`);
 console.log(`   ✓ Total de imagens com alt: ${allImages.length}`);
+
+if (!whatsappFloat || !whatsappFloat.getAttribute('href')?.includes('5511933565640')) {
+  throw new Error('Falha no botão flutuante oficial do WhatsApp.');
+}
 
 console.log('\n🎉 NOVO LAYOUT VALIDADO E APROVADO COM 100% DE SUCESSO!');

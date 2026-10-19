@@ -9,7 +9,7 @@ import Testimonials from '../components/Testimonials.astro';
 import BookingForm from '../components/BookingForm.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import Footer from '../components/Footer.astro';
-import ThemeSwitcher from '../components/ThemeSwitcher.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import { THEMES, THEME_DEFAULT_ID } from '../data/themes';
 
 const initialTheme = THEMES[THEME_DEFAULT_ID];
@@ -46,6 +46,6 @@ const initialTheme = THEMES[THEME_DEFAULT_ID];
   <!-- Rodapé com 4 Colunas e Links Sociais -->
   <Footer theme={initialTheme} />
 
-  <!-- Theme Switcher Flutuante para Alternar as Identidades Visuais -->
-  <ThemeSwitcher />
+  <!-- Botão Flutuante Oficial do WhatsApp com Paleta do Salão -->
+  <WhatsAppFloat phoneNumber="5511933565640" displayPhone="(11) 93356-5640" />
 </Layout>

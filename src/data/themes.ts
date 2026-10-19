@@ -405,8 +405,8 @@ export const THEMES: ThemeCatalog = {
       attendantName: 'Juliana Mendes',
       attendantRole: 'Concierge Bella Vita',
       attendantAvatar: '/images/attendant-juliana.jpg',
-      whatsappNumber: '5511987654321',
-      whatsappDisplay: '(11) 98765-4321',
+      whatsappNumber: '5511933565640',
+      whatsappDisplay: '(11) 93356-5640',
       benefits: [
         'Atendimento individualizado com consultoria de imagem',
         'Produtos de alta performance e rituais exclusivos',
@@ -432,8 +432,8 @@ export const THEMES: ThemeCatalog = {
     footer: {
       logoPrefix: 'BELLA VITA',
       logoHighlight: 'HAIR STUDIO',
-      phone1: '(11) 98765-4321',
-      phone2: '(11) 98765-4321',
+      phone1: '(11) 93356-5640',
+      phone2: '(11) 93356-5640',
       addressLine1: 'Rua Oscar Freire, 920 - Jardins',
       addressLine2: 'São Paulo - SP',
       hoursTitle: 'Horário de atendimento',
