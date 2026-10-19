@@ -261,8 +261,23 @@ console.log(`   ✓ Botão Flutuante do WhatsApp presente: ${!!whatsappFloat}`);
 console.log(`   ✓ WhatsApp Float direcionando para 5511933565640: ${whatsappFloat?.getAttribute('href')?.includes('5511933565640')}`);
 console.log(`   ✓ Total de imagens com alt: ${allImages.length}`);
 
+// Verificações dos novos recursos de Atendentes e Telefones Clicáveis
+const attendantBtns = document.querySelectorAll('.attendant-select-btn');
+const attendantSelect = document.getElementById('booking-attendant-select');
+const attendantDirectLink = document.getElementById('booking-attendant-direct-link');
+const footerPhoneLinks = document.querySelectorAll('#footer-phones-container a[href*="wa.me"]');
+
+console.log(`   ✓ Botões de seleção de atendentes presentes: ${attendantBtns.length} (Esperado >= 3)`);
+console.log(`   ✓ Seletor de atendente no formulário presente: ${!!attendantSelect}`);
+console.log(`   ✓ Link direto de WhatsApp da atendente presente: ${!!attendantDirectLink}`);
+console.log(`   ✓ Telefones cadastrados no rodapé clicáveis com envio de mensagem (wa.me): ${footerPhoneLinks.length} links`);
+
 if (!whatsappFloat || !whatsappFloat.getAttribute('href')?.includes('5511933565640')) {
   throw new Error('Falha no botão flutuante oficial do WhatsApp.');
+}
+
+if (attendantBtns.length < 3 || !attendantSelect || !attendantDirectLink || footerPhoneLinks.length === 0) {
+  throw new Error('Falha na validação do seletor de atendentes ou dos telefones clicáveis no rodapé.');
 }
 
 console.log('\n🎉 NOVO LAYOUT VALIDADO E APROVADO COM 100% DE SUCESSO!');

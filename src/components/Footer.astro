@@ -26,14 +26,62 @@ const { theme } = Astro.props;
 
       <!-- Coluna 2: Contatos Telefônicos e Endereço -->
       <div class="lg:col-span-3 space-y-4">
-        <!-- Telefones -->
+        <!-- Telefones e WhatsApp Oficiais Clicáveis -->
         <div class="flex items-start gap-3">
-          <svg class="w-4 h-4 text-theme-on-dark-muted flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <svg class="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
           </svg>
-          <div class="font-sans text-xs sm:text-sm text-theme-on-dark-muted space-y-0.5 font-light">
-            <p data-theme-field="footer.phone1">{theme.footer.phone1}</p>
-            <p data-theme-field="footer.phone2">{theme.footer.phone2}</p>
+          <div id="footer-phones-container" class="font-sans text-xs sm:text-sm text-theme-on-dark-muted space-y-2 font-light">
+            {theme.bookingForm.attendants ? (
+              theme.bookingForm.attendants.map((att, idx) => {
+                const cleanPhone = att.whatsappNumber.replace(/\D/g, '');
+                const encodedMsg = encodeURIComponent(`Olá, ${att.name}! Gostaria de informações sobre o ${theme.meta.salonName}.`);
+                const waUrl = `https://wa.me/${cleanPhone}?text=${encodedMsg}`;
+                return (
+                  <a
+                    href={waUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center gap-2 text-stone-200 hover:text-emerald-400 transition-colors group cursor-pointer"
+                    title={`Enviar mensagem no WhatsApp para ${att.name}`}
+                  >
+                    <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-emerald-500/15 text-emerald-400 flex-shrink-0 group-hover:scale-110 transition-transform">
+                      <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
+                        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z" />
+                      </svg>
+                    </span>
+                    <span
+                      class="font-medium group-hover:underline underline-offset-2"
+                      data-theme-field={idx === 0 ? "footer.phone1" : idx === 1 ? "footer.phone2" : undefined}
+                    >
+                      {att.whatsappDisplay}
+                    </span>
+                    <span class="text-[11px] text-theme-on-dark-muted group-hover:text-emerald-300 transition-colors">
+                      • {att.name}
+                    </span>
+                  </a>
+                );
+              })
+            ) : (
+              <>
+                <a
+                  href={`https://wa.me/${theme.footer.phone1.replace(/\D/g, '')}?text=${encodeURIComponent(`Olá! Gostaria de informações sobre o ${theme.meta.salonName}.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-2 text-stone-200 hover:text-emerald-400 transition-colors"
+                >
+                  <span data-theme-field="footer.phone1">{theme.footer.phone1}</span>
+                </a>
+                <a
+                  href={`https://wa.me/${theme.footer.phone2.replace(/\D/g, '')}?text=${encodeURIComponent(`Olá! Gostaria de informações sobre o ${theme.meta.salonName}.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-2 text-stone-200 hover:text-emerald-400 transition-colors"
+                >
+                  <span data-theme-field="footer.phone2">{theme.footer.phone2}</span>
+                </a>
+              </>
+            )}
           </div>
         </div>
 

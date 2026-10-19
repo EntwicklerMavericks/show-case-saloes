@@ -41,46 +41,108 @@ const { theme } = Astro.props;
           {theme.bookingForm.description}
         </p>
 
-        <!-- Card da Atendente com Status Online e WhatsApp -->
-        <div class="p-4 sm:p-5 rounded-theme-card bg-theme-card-dark border border-theme-border-dark flex items-center gap-4 mb-8 shadow-md">
-          <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-theme-accent">
-            <img
-              id="booking-attendant-avatar"
-              src={theme.bookingForm.attendantAvatar}
-              alt={theme.bookingForm.attendantName}
-              class="w-full h-full object-cover"
-              data-theme-field="bookingForm.attendantAvatar"
-              data-theme-target="src"
-              loading="lazy"
-            />
-            <!-- Ponto Verde Pulsante de Status Online -->
-            <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-theme-dark rounded-full">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            </span>
-          </div>
-
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-1.5 mb-1">
-              <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span class="text-[11px] sm:text-xs uppercase tracking-wider text-emerald-400 font-semibold">
-                Online para agendamentos
+        <!-- Card da Atendente com Status Online, Seletor e WhatsApp Oficial -->
+        <div class="p-4 sm:p-5 rounded-theme-card bg-theme-card-dark border border-theme-border-dark mb-8 shadow-md">
+          <!-- Detalhes da Atendente Selecionada -->
+          <div class="flex items-center gap-4">
+            <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-theme-accent">
+              <img
+                id="booking-attendant-avatar"
+                src={theme.bookingForm.attendantAvatar}
+                alt={theme.bookingForm.attendantName}
+                class="w-full h-full object-cover transition-opacity duration-200"
+                data-theme-field="bookingForm.attendantAvatar"
+                data-theme-target="src"
+                loading="lazy"
+              />
+              <!-- Ponto Verde Pulsante de Status Online -->
+              <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-theme-dark rounded-full">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               </span>
             </div>
-            <p
-              id="booking-attendant-name"
-              class="font-heading text-base sm:text-lg text-theme-on-dark font-medium truncate"
-              data-theme-field="bookingForm.attendantName"
-            >
-              {theme.bookingForm.attendantName}
-            </p>
-            <p
-              id="booking-attendant-role"
-              class="text-xs text-theme-on-dark-muted truncate"
-              data-theme-field="bookingForm.attendantRole"
-            >
-              {theme.bookingForm.attendantRole} • WhatsApp Oficial
-            </p>
+
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5 mb-1">
+                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-[11px] sm:text-xs uppercase tracking-wider text-emerald-400 font-semibold">
+                  Online para agendamentos
+                </span>
+              </div>
+              <p
+                id="booking-attendant-name"
+                class="font-heading text-base sm:text-lg text-theme-on-dark font-medium truncate"
+                data-theme-field="bookingForm.attendantName"
+              >
+                {theme.bookingForm.attendantName}
+              </p>
+              <p
+                id="booking-attendant-role"
+                class="text-xs text-theme-on-dark-muted truncate"
+                data-theme-field="bookingForm.attendantRole"
+              >
+                {theme.bookingForm.attendantRole} • WhatsApp Oficial
+              </p>
+              <!-- Link Direto para Iniciar Conversa no WhatsApp com a Atendente -->
+              <a
+                id="booking-attendant-direct-link"
+                href={`https://wa.me/${theme.bookingForm.whatsappNumber.replace(/\D/g, '')}?text=${encodeURIComponent(`Olá, ${theme.bookingForm.attendantName}! Gostaria de informações sobre agendamento no ${theme.meta.salonName}.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-1 inline-flex items-center gap-1 text-[11px] sm:text-xs text-emerald-400 hover:text-emerald-300 transition-colors group cursor-pointer"
+                title="Conversar diretamente via WhatsApp"
+              >
+                <svg class="w-3 h-3 fill-current group-hover:scale-110 transition-transform flex-shrink-0" viewBox="0 0 24 24">
+                  <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z" />
+                </svg>
+                <span id="booking-attendant-direct-display" class="font-medium">{theme.bookingForm.whatsappDisplay}</span>
+                <span class="text-stone-400 group-hover:text-emerald-300 transition-colors">↗ Conversar</span>
+              </a>
+            </div>
           </div>
+
+          <!-- Seletor Interativo de Outras Atendentes Disponíveis -->
+          {theme.bookingForm.attendants && theme.bookingForm.attendants.length > 1 && (
+            <div class="mt-4 pt-3.5 border-t border-theme-border-dark/60">
+              <div class="flex items-center justify-between mb-2.5">
+                <span class="text-[11px] uppercase tracking-wider text-theme-on-dark-muted font-medium">
+                  Ou selecione outra atendente:
+                </span>
+                <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  {theme.bookingForm.attendants.length} online agora
+                </span>
+              </div>
+              <div class="grid grid-cols-3 gap-2" id="attendants-selector-container">
+                {theme.bookingForm.attendants.map((att, idx) => (
+                  <button
+                    type="button"
+                    class={`attendant-select-btn p-2 rounded-lg border text-left transition-all duration-200 flex flex-col items-center gap-1 group cursor-pointer ${
+                      idx === 0
+                        ? 'border-theme-accent bg-theme-accent/15 ring-1 ring-theme-accent text-white'
+                        : 'border-theme-border-dark bg-neutral-900/80 hover:border-theme-accent/60 text-stone-300'
+                    }`}
+                    data-attendant-id={att.id}
+                    data-attendant-name={att.name}
+                    data-attendant-role={att.role}
+                    data-attendant-avatar={att.avatar}
+                    data-attendant-whatsapp={att.whatsappNumber}
+                    data-attendant-display={att.whatsappDisplay}
+                    aria-pressed={idx === 0 ? "true" : "false"}
+                    title={`Selecionar ${att.name}`}
+                  >
+                    <div class="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-theme-border-dark group-hover:scale-105 transition-transform flex-shrink-0">
+                      <img src={att.avatar} alt={att.name} class="w-full h-full object-cover" />
+                      <span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 border border-theme-dark"></span>
+                    </div>
+                    <div class="text-center w-full">
+                      <p class="text-[11px] font-medium leading-tight truncate">{att.name.split(' ')[0]}</p>
+                      <p class="text-[9px] text-stone-400 truncate leading-tight mt-0.5">{att.whatsappDisplay}</p>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <!-- 3 Benefícios de Agendar Conosco -->
@@ -227,6 +289,35 @@ const { theme } = Astro.props;
             data-salon-name={theme.meta.salonName}
             class="space-y-5"
           >
+            <!-- Seleção de Atendente no Formulário -->
+            <div>
+              <label for="booking-attendant-select" class="block text-xs uppercase tracking-wider font-medium text-theme-on-dark-muted mb-1.5 flex items-center justify-between">
+                <span>Atendente / Concierge de Preferência</span>
+                <span class="text-[10px] text-emerald-400 font-medium lowercase tracking-normal flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  online agora
+                </span>
+              </label>
+              <div class="relative">
+                <select
+                  id="booking-attendant-select"
+                  name="attendant"
+                  class="w-full px-4 py-3 bg-neutral-900 border border-theme-border-dark rounded-theme-btn text-theme-on-dark text-base sm:text-sm focus:outline-none focus:border-theme-accent transition-colors appearance-none pr-10 cursor-pointer [color-scheme:dark]"
+                >
+                  {theme.bookingForm.attendants?.map((att) => (
+                    <option value={att.id} class="bg-neutral-900 text-stone-100 py-1">
+                      {att.name} — {att.role} ({att.whatsappDisplay})
+                    </option>
+                  ))}
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-theme-on-dark-muted">
+                  <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
             <!-- Linha 1: Nome e Telefone -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -404,6 +495,91 @@ const { theme } = Astro.props;
     const phoneError = document.getElementById('booking-phone-error');
     const serviceError = document.getElementById('booking-service-error');
 
+    // -------------------------------------------------------------
+    // Seletor Interativo de Atendentes / Concierges
+    // -------------------------------------------------------------
+    const attendantBtns = document.querySelectorAll<HTMLButtonElement>('.attendant-select-btn');
+    const attendantAvatar = document.getElementById('booking-attendant-avatar') as HTMLImageElement | null;
+    const attendantNameEl = document.getElementById('booking-attendant-name');
+    const attendantRoleEl = document.getElementById('booking-attendant-role');
+    const attendantDirectLink = document.getElementById('booking-attendant-direct-link') as HTMLAnchorElement | null;
+    const attendantDirectDisplay = document.getElementById('booking-attendant-direct-display');
+    const attendantSelectDropdown = document.getElementById('booking-attendant-select') as HTMLSelectElement | null;
+
+    function selectAttendant(att: {
+      id: string;
+      name: string;
+      role: string;
+      avatar: string;
+      whatsappNumber: string;
+      whatsappDisplay: string;
+    }) {
+      if (form) {
+        form.setAttribute('data-attendant-name', att.name);
+        form.setAttribute('data-whatsapp-number', att.whatsappNumber);
+      }
+
+      if (attendantAvatar) {
+        attendantAvatar.style.opacity = '0.4';
+        setTimeout(() => {
+          attendantAvatar.src = att.avatar;
+          attendantAvatar.alt = att.name;
+          attendantAvatar.style.opacity = '1';
+        }, 120);
+      }
+
+      if (attendantNameEl) attendantNameEl.textContent = att.name;
+      if (attendantRoleEl) attendantRoleEl.textContent = `${att.role} • WhatsApp Oficial`;
+
+      if (attendantDirectDisplay) attendantDirectDisplay.textContent = att.whatsappDisplay;
+      if (attendantDirectLink) {
+        const clean = att.whatsappNumber.replace(/\D/g, '');
+        const salonName = form?.getAttribute('data-salon-name') || 'Salão';
+        const msg = encodeURIComponent(`Olá, ${att.name}! Gostaria de informações sobre agendamento no ${salonName}.`);
+        attendantDirectLink.href = `https://wa.me/${clean}?text=${msg}`;
+      }
+
+      // Atualiza botões
+      attendantBtns.forEach((btn) => {
+        const isMatch = btn.getAttribute('data-attendant-id') === att.id;
+        btn.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
+        if (isMatch) {
+          btn.classList.add('border-theme-accent', 'bg-theme-accent/15', 'ring-1', 'ring-theme-accent', 'text-white');
+          btn.classList.remove('border-theme-border-dark', 'bg-neutral-900/80', 'text-stone-300');
+        } else {
+          btn.classList.remove('border-theme-accent', 'bg-theme-accent/15', 'ring-1', 'ring-theme-accent', 'text-white');
+          btn.classList.add('border-theme-border-dark', 'bg-neutral-900/80', 'text-stone-300');
+        }
+      });
+
+      // Sincroniza dropdown do formulário se aplicável
+      if (attendantSelectDropdown && attendantSelectDropdown.value !== att.id) {
+        attendantSelectDropdown.value = att.id;
+      }
+    }
+
+    attendantBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-attendant-id') || '';
+        const name = btn.getAttribute('data-attendant-name') || '';
+        const role = btn.getAttribute('data-attendant-role') || '';
+        const avatar = btn.getAttribute('data-attendant-avatar') || '';
+        const whatsappNumber = btn.getAttribute('data-attendant-whatsapp') || '';
+        const whatsappDisplay = btn.getAttribute('data-attendant-display') || '';
+        selectAttendant({ id, name, role, avatar, whatsappNumber, whatsappDisplay });
+      });
+    });
+
+    if (attendantSelectDropdown) {
+      attendantSelectDropdown.addEventListener('change', () => {
+        const selId = attendantSelectDropdown.value;
+        const matchingBtn = document.querySelector<HTMLButtonElement>(`.attendant-select-btn[data-attendant-id="${selId}"]`);
+        if (matchingBtn) {
+          matchingBtn.click();
+        }
+      });
+    }
+
     // Define data mínima como hoje no seletor de data
     if (dateInput) {
       try {
@@ -504,15 +680,16 @@ const { theme } = Astro.props;
       const periodEl = form.querySelector('input[name="booking-period"]:checked') as HTMLInputElement | null;
       const periodVal = periodEl ? periodEl.value : 'A combinar';
 
-      // Parâmetros do Salão
+      // Parâmetros do Salão e Atendente
       const attendantName = form.getAttribute('data-attendant-name') || 'Atendimento';
       const salonName = form.getAttribute('data-salon-name') || 'Salão';
-      const rawWhatsappTarget = form.getAttribute('data-whatsapp-number') || '5511987654321';
+      const rawWhatsappTarget = form.getAttribute('data-whatsapp-number') || '5511933565640';
       const cleanTargetPhone = rawWhatsappTarget.replace(/\D/g, '');
 
       // Construção da mensagem estruturada e polida
       let message = `Olá, ${attendantName}! Gostaria de solicitar um agendamento no *${salonName}*.\n\n`;
       message += `📋 *Dados da Solicitação:*\n`;
+      message += `• *Atendente:* ${attendantName}\n`;
       message += `• *Nome:* ${nameInput?.value.trim()}\n`;
       message += `• *WhatsApp:* ${phoneInput?.value.trim()}\n`;
       message += `• *Serviço de interesse:* ${serviceSelect?.value}\n`;

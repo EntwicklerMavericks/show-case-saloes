@@ -187,6 +187,7 @@ export class ThemeManager {
     this.updateGalleryCollection(theme);
     this.updateTestimonialsCollection(theme);
     this.updateBookingForm(theme);
+    this.updateFooterPhones(theme);
 
     // 4. Atualiza estado visual do Theme Switcher
     this.updateSwitcherControls(theme.meta.id);
@@ -385,6 +386,120 @@ export class ThemeManager {
       form.setAttribute('data-salon-name', theme.meta.salonName);
     }
 
+    // Atualiza links e labels da atendente principal
+    const directLink = document.getElementById('booking-attendant-direct-link') as HTMLAnchorElement | null;
+    if (directLink) {
+      const clean = theme.bookingForm.whatsappNumber.replace(/\D/g, '');
+      const msg = encodeURIComponent(`Olá, ${theme.bookingForm.attendantName}! Gostaria de informações sobre agendamento no ${theme.meta.salonName}.`);
+      directLink.href = `https://wa.me/${clean}?text=${msg}`;
+    }
+
+    const directDisplay = document.getElementById('booking-attendant-direct-display');
+    if (directDisplay) {
+      directDisplay.textContent = theme.bookingForm.whatsappDisplay;
+    }
+
+    const attendantAvatar = document.getElementById('booking-attendant-avatar') as HTMLImageElement | null;
+    if (attendantAvatar) {
+      attendantAvatar.src = theme.bookingForm.attendantAvatar;
+      attendantAvatar.alt = theme.bookingForm.attendantName;
+    }
+
+    const attendantNameEl = document.getElementById('booking-attendant-name');
+    if (attendantNameEl) {
+      attendantNameEl.textContent = theme.bookingForm.attendantName;
+    }
+
+    const attendantRoleEl = document.getElementById('booking-attendant-role');
+    if (attendantRoleEl) {
+      attendantRoleEl.textContent = `${theme.bookingForm.attendantRole} • WhatsApp Oficial`;
+    }
+
+    // Atualiza dropdown de atendentes no formulário
+    const attendantSelect = document.getElementById('booking-attendant-select') as HTMLSelectElement | null;
+    if (attendantSelect && theme.bookingForm.attendants) {
+      attendantSelect.innerHTML = theme.bookingForm.attendants.map((att) => (
+        `<option value="${att.id}">${att.name} — ${att.role} (${att.whatsappDisplay})</option>`
+      )).join('');
+    }
+
+    // Atualiza container de botões de seleção de atendentes
+    const selectorContainer = document.getElementById('attendants-selector-container');
+    if (selectorContainer && theme.bookingForm.attendants) {
+      selectorContainer.innerHTML = theme.bookingForm.attendants.map((att, idx) => `
+        <button
+          type="button"
+          class="attendant-select-btn p-2 rounded-lg border text-left transition-all duration-200 flex flex-col items-center gap-1 group cursor-pointer ${
+            idx === 0
+              ? 'border-theme-accent bg-theme-accent/15 ring-1 ring-theme-accent text-white'
+              : 'border-theme-border-dark bg-neutral-900/80 hover:border-theme-accent/60 text-stone-300'
+          }"
+          data-attendant-id="${att.id}"
+          data-attendant-name="${att.name}"
+          data-attendant-role="${att.role}"
+          data-attendant-avatar="${att.avatar}"
+          data-attendant-whatsapp="${att.whatsappNumber}"
+          data-attendant-display="${att.whatsappDisplay}"
+          aria-pressed="${idx === 0 ? 'true' : 'false'}"
+          title="Selecionar ${att.name}"
+        >
+          <div class="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-theme-border-dark group-hover:scale-105 transition-transform flex-shrink-0">
+            <img src="${att.avatar}" alt="${att.name}" class="w-full h-full object-cover" />
+            <span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 border border-theme-dark"></span>
+          </div>
+          <div class="text-center w-full">
+            <p class="text-[11px] font-medium leading-tight truncate">${att.name.split(' ')[0]}</p>
+            <p class="text-[9px] text-stone-400 truncate leading-tight mt-0.5">${att.whatsappDisplay}</p>
+          </div>
+        </button>
+      `).join('');
+
+      const newBtns = selectorContainer.querySelectorAll<HTMLButtonElement>('.attendant-select-btn');
+      newBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-attendant-id') || '';
+          const name = btn.getAttribute('data-attendant-name') || '';
+          const role = btn.getAttribute('data-attendant-role') || '';
+          const avatar = btn.getAttribute('data-attendant-avatar') || '';
+          const whatsappNumber = btn.getAttribute('data-attendant-whatsapp') || '';
+          const whatsappDisplay = btn.getAttribute('data-attendant-display') || '';
+
+          if (form) {
+            form.setAttribute('data-attendant-name', name);
+            form.setAttribute('data-whatsapp-number', whatsappNumber);
+          }
+          if (attendantAvatar) {
+            attendantAvatar.src = avatar;
+            attendantAvatar.alt = name;
+          }
+          if (attendantNameEl) attendantNameEl.textContent = name;
+          if (attendantRoleEl) attendantRoleEl.textContent = `${role} • WhatsApp Oficial`;
+          if (directDisplay) directDisplay.textContent = whatsappDisplay;
+          if (directLink) {
+            const clean = whatsappNumber.replace(/\D/g, '');
+            const msg = encodeURIComponent(`Olá, ${name}! Gostaria de informações sobre agendamento no ${theme.meta.salonName}.`);
+            directLink.href = `https://wa.me/${clean}?text=${msg}`;
+          }
+
+          newBtns.forEach((b) => {
+            const match = b.getAttribute('data-attendant-id') === id;
+            b.setAttribute('aria-pressed', match ? 'true' : 'false');
+            if (match) {
+              b.classList.add('border-theme-accent', 'bg-theme-accent/15', 'ring-1', 'ring-theme-accent', 'text-white');
+              b.classList.remove('border-theme-border-dark', 'bg-neutral-900/80', 'text-stone-300');
+            } else {
+              b.classList.remove('border-theme-accent', 'bg-theme-accent/15', 'ring-1', 'ring-theme-accent', 'text-white');
+              b.classList.add('border-theme-border-dark', 'bg-neutral-900/80', 'text-stone-300');
+            }
+          });
+
+          if (attendantSelect && attendantSelect.value !== id) {
+            attendantSelect.value = id;
+          }
+        });
+      });
+    }
+
     const serviceSelect = document.getElementById('booking-service') as HTMLSelectElement | null;
     if (serviceSelect) {
       const selectedValue = serviceSelect.value;
@@ -428,6 +543,41 @@ export class ThemeManager {
     if (directMapsLink && theme.bookingForm.location) {
       directMapsLink.href = theme.bookingForm.location.mapsUrl;
     }
+  }
+
+  private updateFooterPhones(theme: Theme): void {
+    const container = document.getElementById('footer-phones-container');
+    if (!container || !theme.bookingForm.attendants) return;
+
+    container.innerHTML = theme.bookingForm.attendants.map((att, idx) => {
+      const cleanPhone = att.whatsappNumber.replace(/\D/g, '');
+      const encodedMsg = encodeURIComponent(`Olá, ${att.name}! Gostaria de informações sobre o ${theme.meta.salonName}.`);
+      const waUrl = `https://wa.me/${cleanPhone}?text=${encodedMsg}`;
+      return `
+        <a
+          href="${waUrl}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 text-stone-200 hover:text-emerald-400 transition-colors group cursor-pointer"
+          title="Enviar mensagem no WhatsApp para ${att.name}"
+        >
+          <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-emerald-500/15 text-emerald-400 flex-shrink-0 group-hover:scale-110 transition-transform">
+            <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z" />
+            </svg>
+          </span>
+          <span
+            class="font-medium group-hover:underline underline-offset-2"
+            ${idx === 0 ? 'data-theme-field="footer.phone1"' : idx === 1 ? 'data-theme-field="footer.phone2"' : ''}
+          >
+            ${att.whatsappDisplay}
+          </span>
+          <span class="text-[11px] text-theme-on-dark-muted group-hover:text-emerald-300 transition-colors">
+            • ${att.name}
+          </span>
+        </a>
+      `;
+    }).join('');
   }
 
   private updateSwitcherControls(activeId: ThemeId): void {

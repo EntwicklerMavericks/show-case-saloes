@@ -141,6 +141,15 @@ export interface SalonLocationData {
   mapsUrl: string;
 }
 
+export interface Attendant {
+  id: string;
+  name: string;
+  role: string;
+  avatar: string;
+  whatsappNumber: string;
+  whatsappDisplay: string;
+}
+
 export interface BookingFormData {
   overline: string;
   title: string;
@@ -150,6 +159,7 @@ export interface BookingFormData {
   attendantAvatar: string;
   whatsappNumber: string;
   whatsappDisplay: string;
+  attendants: Attendant[];
   benefits: [string, string, string];
   submitButtonText: string;
   location: SalonLocationData;
@@ -407,6 +417,32 @@ export const THEMES: ThemeCatalog = {
       attendantAvatar: '/images/attendant-juliana.jpg',
       whatsappNumber: '5511933565640',
       whatsappDisplay: '(11) 93356-5640',
+      attendants: [
+        {
+          id: 'juliana',
+          name: 'Juliana Mendes',
+          role: 'Concierge Bella Vita',
+          avatar: '/images/attendant-juliana.jpg',
+          whatsappNumber: '5511933565640',
+          whatsappDisplay: '(11) 93356-5640',
+        },
+        {
+          id: 'camila',
+          name: 'Camila Rocha',
+          role: 'Consultora de Beleza & Cor',
+          avatar: '/images/attendant-camila.jpg',
+          whatsappNumber: '5511977770002',
+          whatsappDisplay: '(11) 97777-0002',
+        },
+        {
+          id: 'helena',
+          name: 'Helena Castro',
+          role: 'Especialista em Tratamentos & Bem-Estar',
+          avatar: '/images/attendant-helena.jpg',
+          whatsappNumber: '5511966660003',
+          whatsappDisplay: '(11) 96666-0003',
+        },
+      ],
       benefits: [
         'Atendimento individualizado com consultoria de imagem',
         'Produtos de alta performance e rituais exclusivos',
@@ -433,7 +469,7 @@ export const THEMES: ThemeCatalog = {
       logoPrefix: 'BELLA VITA',
       logoHighlight: 'HAIR STUDIO',
       phone1: '(11) 93356-5640',
-      phone2: '(11) 93356-5640',
+      phone2: '(11) 97777-0002',
       addressLine1: 'Rua Oscar Freire, 920 - Jardins',
       addressLine2: 'São Paulo - SP',
       hoursTitle: 'Horário de atendimento',
@@ -656,6 +692,32 @@ export const THEMES: ThemeCatalog = {
       attendantAvatar: '/images/attendant-camila.jpg',
       whatsappNumber: '5511977770002',
       whatsappDisplay: '(11) 97777-0002',
+      attendants: [
+        {
+          id: 'camila',
+          name: 'Camila Rocha',
+          role: 'Recepção Lumina Studio',
+          avatar: '/images/attendant-camila.jpg',
+          whatsappNumber: '5511977770002',
+          whatsappDisplay: '(11) 97777-0002',
+        },
+        {
+          id: 'juliana',
+          name: 'Juliana Mendes',
+          role: 'Consultora de Agendamentos',
+          avatar: '/images/attendant-juliana.jpg',
+          whatsappNumber: '5511933565640',
+          whatsappDisplay: '(11) 93356-5640',
+        },
+        {
+          id: 'helena',
+          name: 'Helena Castro',
+          role: 'Especialista Lumina Hair',
+          avatar: '/images/attendant-helena.jpg',
+          whatsappNumber: '5511966660003',
+          whatsappDisplay: '(11) 96666-0003',
+        },
+      ],
       benefits: [
         'Visagismo moderno e valorização da sua beleza natural',
         'Espaço acolhedor com atendimento caloroso e dinâmico',
@@ -682,7 +744,7 @@ export const THEMES: ThemeCatalog = {
       logoPrefix: 'LUMINA',
       logoHighlight: 'STUDIO & GLOW',
       phone1: '(11) 97777-0002',
-      phone2: '(11) 97777-0002',
+      phone2: '(11) 93356-5640',
       addressLine1: 'Rua Bela Cintra, 890 - Vila Madalena',
       addressLine2: 'São Paulo - SP',
       hoursTitle: 'Horário de atendimento',
@@ -905,6 +967,32 @@ export const THEMES: ThemeCatalog = {
       attendantAvatar: '/images/attendant-helena.jpg',
       whatsappNumber: '5511966660003',
       whatsappDisplay: '(11) 96666-0003',
+      attendants: [
+        {
+          id: 'helena',
+          name: 'Helena Castro',
+          role: 'Atendimento Botânica',
+          avatar: '/images/attendant-helena.jpg',
+          whatsappNumber: '5511966660003',
+          whatsappDisplay: '(11) 96666-0003',
+        },
+        {
+          id: 'juliana',
+          name: 'Juliana Mendes',
+          role: 'Acolhimento & Aromaterapia',
+          avatar: '/images/attendant-juliana.jpg',
+          whatsappNumber: '5511933565640',
+          whatsappDisplay: '(11) 93356-5640',
+        },
+        {
+          id: 'camila',
+          name: 'Camila Rocha',
+          role: 'Terapeuta Capilar Integrativa',
+          avatar: '/images/attendant-camila.jpg',
+          whatsappNumber: '5511977770002',
+          whatsappDisplay: '(11) 97777-0002',
+        },
+      ],
       benefits: [
         'Cosméticos limpos, veganos e aromaterapia inclusa',
         'Diagnóstico personalizado da saúde do couro e fios',
@@ -931,7 +1019,7 @@ export const THEMES: ThemeCatalog = {
       logoPrefix: 'BOTÂNICA',
       logoHighlight: 'CONCEPT SALON',
       phone1: '(11) 96666-0003',
-      phone2: '(11) 96666-0003',
+      phone2: '(11) 93356-5640',
       addressLine1: 'Rua Fradique Coutinho, 1150 - Pinheiros',
       addressLine2: 'São Paulo - SP',
       hoursTitle: 'Horário de atendimento',
